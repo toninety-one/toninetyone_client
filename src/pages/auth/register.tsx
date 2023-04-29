@@ -8,7 +8,7 @@ type FormValues = {
     middleName: string;
 };
 
-export default function RegisterPage() {
+const RegisterPage = () => {
 
     const {register, handleSubmit} = useForm<FormValues>();
     const onSubmit: SubmitHandler<FormValues> = data => console.log(data);
@@ -40,3 +40,5 @@ export default function RegisterPage() {
         </form>
     );
 }
+
+export default RegisterPage;
