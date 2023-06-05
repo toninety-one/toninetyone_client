@@ -1,106 +1,44 @@
-import { useRef, useState, useEffect, SetStateAction } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useRef} from 'react';
+import {useForm} from 'react-hook-form';
+import {ILogin} from "../../types/user/user.interface";
+import {refresh} from "../../types/auth/auth.slice";
+import {useNavigate} from "react-router-dom";
+import {useGetUserMutation, useLoginMutation} from "../../types/auth/auth.api.slice";
+import {useDispatch} from "react-redux";
 
-import { useDispatch } from "react-redux";
-import {
-  useGetUserMutation,
-  useLoginMutation,
-} from "../../types/auth/auth.api.slice";
-import { refresh } from "../../types/auth/auth.slice";
-import { ILogin } from "../../types/user/user.interface";
+export default function Login() {
+    const errRef = useRef<HTMLInputElement>(null);
+    const navigate = useNavigate();
 
-const Login = () => {
-  const userRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const errRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const [userData, setUserData] = useState("");
-  const [passwordData, setPasswordData] = useState("");
-  const [errMsg, setErrMsg] = useState("");
-  const navigate = useNavigate();
+    const [login, {isLoading}] = useLoginMutation();
+    const dispatch = useDispatch();
+    const [getUser] = useGetUserMutation();
 
-  const [login, { isLoading }] = useLoginMutation();
-  const dispatch = useDispatch();
-  const [getUser] = useGetUserMutation();
-  useEffect(() => {
-    userRef.current.focus();
-  }, []);
+    const {register, handleSubmit, formState: {errors}} = useForm<ILogin>();
+    const onSubmit = async (data: ILogin) => {
 
-  useEffect(() => {
-    setErrMsg("");
-  }, [userData, passwordData]);
+        try {
+            const loginResponce = await login(data).unwrap();
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+            dispatch(refresh({token: loginResponce, user: null}));
 
-    try {
-      const data: ILogin = { username: userData, password: passwordData };
-      const loginResponce = await login(data).unwrap();
+            const userResponce = await getUser(null).unwrap();
 
-      dispatch(refresh({ token: loginResponce, user: null }));
+            dispatch(refresh({token: loginResponce, user: userResponce}));
 
-      const userResponce = await getUser(null).unwrap();
-      
-      dispatch(refresh({ token: loginResponce, user: userResponce }));
+            navigate("/profile");
+        } catch (err: any) {
+            // catch errors or use formState: {errors}
+            errRef.current?.focus();
+        }
+    };
 
-      setUserData("");
-      setPasswordData("");
-      navigate("/profile");
-    } catch (err: any) {
-      if (!err?.status) {
-        setErrMsg("No Server Response");
-      } else if (err.originalStatus === 400) {
-        setErrMsg("Missing Username or Password");
-      } else if (err.originalStatus === 401) {
-        setErrMsg("Unauthorized");
-      } else {
-        setErrMsg("Login Failed");
-      }
-      errRef.current.focus();
-    }
-  };
+    return isLoading ? (<div>loading</div>) : (
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <input type="text" placeholder="UserName" {...register("username", {})} />
+            <input type="password" placeholder="Password" {...register("password", {})} />
 
-  const handleUserInput = (e: { target: { value: SetStateAction<string> } }) =>
-    setUserData(e.target.value);
-
-  const handlePwdInput = (e: { target: { value: SetStateAction<string> } }) =>
-    setPasswordData(e.target.value);
-
-  return isLoading ? (
-    <h1>Loading...</h1>
-  ) : (
-    <section className="login">
-      <p
-        ref={errRef}
-        className={errMsg ? "errmsg" : "offscreen"}
-        aria-live="assertive"
-      >
-        {errMsg}
-      </p>
-
-      <h1>Employee Login</h1>
-
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          ref={userRef}
-          value={userData}
-          onChange={handleUserInput}
-          autoComplete="off"
-          required
-        />
-
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          onChange={handlePwdInput}
-          value={passwordData}
-          required
-        />
-        <button>Sign In</button>
-      </form>
-    </section>
-  );
-};
-export default Login;
+            <input type="submit"/>
+        </form>
+    );
+}

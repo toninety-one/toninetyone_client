@@ -4,6 +4,7 @@ import { useGetUserDataQuery } from "../../types/auth/auth.api.slice";
 import { refresh } from "../../types/auth/auth.slice";
 
 const Profile = () => {
+
   const auth = useAuth();
   const dispatch = useDispatch();
 
