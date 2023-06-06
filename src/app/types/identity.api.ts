@@ -4,7 +4,7 @@ import { ILogin, IToken } from "./user/user.interface";
 export const identityApi = createApi({
   reducerPath: "identity",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.API_URL,
+    baseUrl: "https://localhost:7010",
   }),
   tagTypes: ["Identity"],
   endpoints: (builder) => ({

@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import { logOut } from "../../types/auth/auth.slice";
 
 const Public = () => {
   const auth = useAuth();
-  console.log(auth)
+  console.log(auth);
+  document.title = "home";
+
+  const onClick = () => {
+    logOut();
+  };
+
   return (
     <section className="public">
       <header>
@@ -12,6 +19,7 @@ const Public = () => {
       <main>Янка брыль</main>
       <footer>
         <Link to="/login">Login</Link>
+        <button onClick={onClick}>логоут</button>
       </footer>
     </section>
   );

@@ -1,13 +1,26 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { Role } from "../../../types/role.enum";
 import useAuth from "../../../hooks/useAuth";
+import { refresh } from "../../../types/auth/auth.slice";
+import { useGetUserDataQuery } from "../../../types/auth/auth.api.slice";
+import { useDispatch } from "react-redux";
 
 const RequireAuth = ({ roles }: { roles?: Role[] }) => {
   const location = useLocation();
+  const dispatch = useDispatch();
 
-  const { user, token } = useAuth();
+  const { token } = useAuth();
+  const { data, isLoading } = useGetUserDataQuery(null);
 
-  if (!user || !user.userRole || !token) {
+  dispatch(refresh({ token, user: data }));
+
+  const { user } = useAuth();
+
+  if (isLoading) {
+    return <div>loading</div>;
+  }
+
+  if (!token || !user || !user.userRole) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 

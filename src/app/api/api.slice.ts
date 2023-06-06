@@ -10,6 +10,7 @@ const baseQuery = fetchBaseQuery({
     credentials: "include",
     prepareHeaders: (headers: Headers, {getState}: any): Headers => {
         const token = getState().auth.token;
+
         if (token) {
             headers.set("Authorization", `Bearer ${token.accessToken}`);
         }
@@ -28,14 +29,14 @@ const baseQueryWithReauth = async (
     let result = await baseQuery(args, api, extraOptions);
 
     if (result?.error) {
-
+        const body = {...api.getState().auth.token};
         // send refresh token to get new access token
         const refreshResponce = await baseQuery(
             {
                 url: "/identity/refresh",
                 method: "POST",
                 // body: { accessToken: "", refreshToken: "" },
-                body: {...api.getState().auth.token},
+                body: body,
             },
             api,
             extraOptions
@@ -44,7 +45,9 @@ const baseQueryWithReauth = async (
         if (refreshResponce) {
             const userResponse = await baseQuery("/user", api, extraOptions);
             // store the new token
-            api.dispatch(refresh({token: refreshResponce, user: userResponse}));
+            api.dispatch(
+                refresh({token: refreshResponce.data, user: userResponse.data})
+            );
             // retry the original query with new access token
             result = await baseQuery(args, api, extraOptions);
         } else {
@@ -58,5 +61,6 @@ const baseQueryWithReauth = async (
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReauth,
     refetchOnFocus: true,
+    // @ts-ignore
     endpoints: (builder) => ({}),
 });
