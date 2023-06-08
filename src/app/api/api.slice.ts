@@ -1,8 +1,4 @@
-import {
-    FetchArgs,
-    createApi,
-    fetchBaseQuery,
-} from "@reduxjs/toolkit/query/react";
+import {createApi, FetchArgs, fetchBaseQuery,} from "@reduxjs/toolkit/query/react";
 import {logOut, refresh} from "../types/auth/auth.slice";
 
 const baseQuery = fetchBaseQuery({
@@ -21,7 +17,7 @@ const baseQuery = fetchBaseQuery({
     },
 });
 
-const baseQueryWithReauth = async (
+const baseQueryWithReAuth = async (
     args: string | FetchArgs,
     api: any,
     extraOptions: NonNullable<unknown>
@@ -59,7 +55,7 @@ const baseQueryWithReauth = async (
 };
 
 export const apiSlice = createApi({
-    baseQuery: baseQueryWithReauth,
+    baseQuery: baseQueryWithReAuth,
     refetchOnFocus: true,
     refetchOnMountOrArgChange: true,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

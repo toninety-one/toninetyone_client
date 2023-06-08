@@ -1,5 +1,5 @@
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider,} from "react-router-dom";
-import Login from "./app/components/pages/Login";
+import Login from "./app/components/pages/login/Login.tsx";
 import Error from "./app/components/pages/error/Error.tsx";
 import Profile from "./app/components/pages/Profile";
 import Layout from "./app/components/ui/layout/layout/Layout.tsx";
@@ -21,7 +21,7 @@ const router = createBrowserRouter(
             <Route path="/login" element={<Login/>}/>
             <Route path="/logout" element={<LogOut/>}/>
             <Route path="/about" element={<About/>}/>
-            <Route path="*" element={<Error code={404} text={"Страница не найденаСтраница не найденаСтраница не найденаСтраница не найденаСтраница не найденаСтраница не найденаСтраница не найденаСтраница не найденаСтраница не найденаСтраница не найденаСтраница не найденаСтраница не найденаСтраница не найденаСтраница не найденаСтраница не найденаСтраница не найденаСтраница не найденаСтраница не найдена"}/>}/>
+            <Route path="*" element={<Error code={404} text={"Страница не найдена"}/>}/>
             {/* protected rotes */}
             <Route element={<RequireAuth/>}>
                 <Route index element={<Profile/>}/>

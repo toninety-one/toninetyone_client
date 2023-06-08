@@ -4,9 +4,9 @@ import App from "./App.tsx";
 import Providers from "./app/components/providers/Providers.tsx";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <Providers>
-      <App />
-    </Providers>
-  </React.StrictMode>
+    <React.StrictMode>
+        <Providers>
+            <App/>
+        </Providers>
+    </React.StrictMode>
 );

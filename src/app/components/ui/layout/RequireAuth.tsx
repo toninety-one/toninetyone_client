@@ -1,4 +1,4 @@
-import {useLocation, Navigate, Outlet} from "react-router-dom";
+import {Navigate, Outlet, useLocation} from "react-router-dom";
 import {Role} from "../../../types/role.enum";
 import useAuth from "../../../hooks/useAuth";
 import {refresh} from "../../../types/auth/auth.slice";

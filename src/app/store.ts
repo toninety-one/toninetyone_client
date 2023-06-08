@@ -1,17 +1,7 @@
-import {configureStore} from "@reduxjs/toolkit";
+import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {setupListeners} from "@reduxjs/toolkit/query";
-import {combineReducers} from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
-import {
-    persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,
-    persistStore,
-} from "redux-persist";
+import {FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE,} from "redux-persist";
 import useCartSlice from "./types/cart/cart.slice";
 import {identityApi} from "./types/identity.api";
 import {apiSlice} from "./api/api.slice";

@@ -15,7 +15,7 @@ const SideBarButton = ({path, button_text}: Props) => {
         active = " sideBar__link_active";
     }
 
-    if (location.pathname != "/" && path == "/"){
+    if (location.pathname != "/" && path == "/") {
         active = ""
     }
 

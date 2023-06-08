@@ -31,4 +31,9 @@ export const disciplineApiSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const {useGetDisciplinesQuery, useGetDisciplineByIdQuery, useCreateDisciplineMutation, useDeleteDisciplineMutation} = disciplineApiSlice;
+export const {
+    useGetDisciplinesQuery,
+    useGetDisciplineByIdQuery,
+    useCreateDisciplineMutation,
+    useDeleteDisciplineMutation
+} = disciplineApiSlice;
