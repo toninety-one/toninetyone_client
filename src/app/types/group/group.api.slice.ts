@@ -1,5 +1,5 @@
 import {apiSlice} from "../../api/api.slice.ts";
-import {IGroupDetails, IGroupLookup} from "./group.interface.ts";
+import {IGroupDetails, IGroupDiscipline, IGroupLookup} from "./group.interface.ts";
 
 export const groupApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -21,6 +21,13 @@ export const groupApiSlice = apiSlice.injectEndpoints({
                 method: "POST",
             }),
         }),
+        addDisciplineToGroup: builder.mutation<string, IGroupDiscipline>({// TODO IGroupCreate
+            query: (body: IGroupDiscipline) => ({
+                url: "/DisciplineGroup/AddDisciplineGroup",
+                method: "POST",
+                body: body,
+            }),
+        }),
         // update
         deleteGroup: builder.mutation<null, string>({
             query: (id: string) => ({
@@ -31,4 +38,9 @@ export const groupApiSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const {useGetGroupsQuery, useGetGroupByIdQuery, useCreateGroupMutation, useDeleteGroupMutation} = groupApiSlice;
+export const {
+    useGetGroupsQuery,
+    useGetGroupByIdQuery,
+    useDeleteGroupMutation,
+    useAddDisciplineToGroupMutation
+} = groupApiSlice;

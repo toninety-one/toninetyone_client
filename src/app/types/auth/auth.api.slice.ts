@@ -1,5 +1,5 @@
 import {apiSlice} from "../../api/api.slice";
-import {ILogin, IToken, IUserDetails} from "./auth.interface.ts";
+import {ILogin, IToken, IUser, IUserDetails} from "./auth.interface.ts";
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -23,8 +23,14 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 method: "GET",
             }),
         }),
+        getAllUsers: builder.query<{ users: IUser[] }, null>({
+            query: () => ({
+                url: "/User/GetAll",
+                method: "GET",
+            }),
+        }),
     }),
 });
 
-export const {useLoginMutation, useGetUserDataQuery, useGetUserMutation} =
+export const {useLoginMutation, useGetUserDataQuery, useGetUserMutation, useGetAllUsersQuery} =
     authApiSlice;

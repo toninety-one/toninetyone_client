@@ -7,7 +7,9 @@ const Discipline = () => {
 
     return isLoading ? (<div>loading</div>) : (
         <div>
-            {data?.disciplines?.map(d => <DisciplineItem key={d.id} item={d}></DisciplineItem>)}
+            {data?.disciplines && data.disciplines.length > 0 ? data?.disciplines?.map(d => <DisciplineItem key={d.id}
+                                                                                                            item={d}></DisciplineItem>) :
+                <div>дисциплин нет </div>}
         </div>
     );
 };

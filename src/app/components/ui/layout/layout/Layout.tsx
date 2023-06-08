@@ -1,6 +1,6 @@
 import {Outlet, useLocation} from "react-router-dom";
 import Header from "../header/Header.tsx";
-import SideBar from "../sIdeBar/SIdeBar.tsx";
+import SideBar from "../sideBar/SIdeBar.tsx";
 import Footer from "../footer/Footer.tsx";
 import "./layout.scss"
 import useAuth from "../../../../hooks/useAuth.ts";

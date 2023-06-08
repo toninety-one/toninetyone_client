@@ -12,6 +12,7 @@ import DisciplineDetails from "./app/components/pages/DisciplineDetails.tsx";
 import "./global.scss";
 import About from "./app/components/pages/About.tsx";
 import LogOut from "./app/components/pages/LogOut.tsx";
+import Users from "./app/components/pages/Users.tsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
             </Route>
             <Route element={<RequireAuth roles={[Role.Admin]}/>}>
                 <Route path="group" element={<Group/>}/>
+                <Route path="users" element={<Users/>}/>
                 <Route path="group/:groupId" element={<GroupDetails/>}/>
             </Route>
         </Route>

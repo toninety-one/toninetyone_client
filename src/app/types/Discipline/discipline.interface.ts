@@ -6,6 +6,10 @@ export interface IDisciplineLookup {
     title: string;
 }
 
+export interface IDisciplineUpdate extends IDisciplineLookup{
+    userId: string;
+}
+
 export interface IDiscipline extends IDisciplineLookup {
     userId: string;
     creationDate: string;

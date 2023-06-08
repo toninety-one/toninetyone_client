@@ -16,3 +16,8 @@ export interface IGroupDetails extends IGroup {
     users: IUser[];
     disciplines: IDiscipline[];
 }
+
+export interface IGroupDiscipline {
+    groupId: string,
+    disciplineId: string
+}

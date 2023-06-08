@@ -1,5 +1,5 @@
 import {apiSlice} from "../../api/api.slice.ts";
-import {IDiscipline, IDisciplineLookup} from "./discipline.interface.ts";
+import {IDiscipline, IDisciplineLookup, IDisciplineUpdate} from "./discipline.interface.ts";
 
 export const disciplineApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -21,7 +21,13 @@ export const disciplineApiSlice = apiSlice.injectEndpoints({
                 method: "POST",
             }),
         }),
-        // update
+        updateDiscipline: builder.mutation<string, IDisciplineUpdate>({// TODO IDisciplineCreate
+            query: (body: IDisciplineUpdate) => ({
+                url: "/discipline",
+                method: "PUT",
+                body: body
+            }),
+        }),
         deleteDiscipline: builder.mutation<null, string>({
             query: (id: string) => ({
                 url: `/discipline/${id}`,
@@ -35,5 +41,6 @@ export const {
     useGetDisciplinesQuery,
     useGetDisciplineByIdQuery,
     useCreateDisciplineMutation,
-    useDeleteDisciplineMutation
+    useDeleteDisciplineMutation,
+    useUpdateDisciplineMutation
 } = disciplineApiSlice;

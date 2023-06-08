@@ -18,6 +18,11 @@ const SideBar = ({role}: { role: Role }) => {
                     <SideBarButton button_text={"Группы"} path={"/group"}/>
                 )}
 
+                {role == Role.Admin && (
+                    <SideBarButton button_text={"Пользователи"} path={"/users"}/>
+                )}
+
+
                 <SideBarButton button_text={"О проекте"} path={"/about"}/>
             </div>
             <div className={"sideBar__logout"}>

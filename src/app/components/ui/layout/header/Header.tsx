@@ -3,7 +3,7 @@ import "./header.scss"
 const Header = () => {
     return (
         <div id="header">
-            {document.title}
+            toninety.one
         </div>
     );
 }
