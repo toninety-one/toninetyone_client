@@ -24,7 +24,7 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth = async (
     args: string | FetchArgs,
     api: any,
-    extraOptions: {}
+    extraOptions: NonNullable<unknown>
 ) => {
     let result = await baseQuery(args, api, extraOptions);
 
@@ -61,6 +61,9 @@ const baseQueryWithReauth = async (
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReauth,
     refetchOnFocus: true,
+    refetchOnMountOrArgChange: true,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     endpoints: (builder) => ({}),
 });

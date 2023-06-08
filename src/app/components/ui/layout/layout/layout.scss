@@ -1,0 +1,35 @@
+#layout {
+  background-color: #0A0A0A;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  color: white;
+
+  main {
+    display: flex;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    margin: 1% 6%;
+
+    #sideBar {
+      width: 20%;
+      margin-right: 0.6%;
+    }
+
+    #body {
+      border: black 1px solid;
+      margin-left: 0.6%;
+      width: 100%;
+      scroll-snap-stop: normal;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      background-color: #282828;
+      border-radius: 10px;
+
+      .body__container {
+      }
+    }
+  }
+}

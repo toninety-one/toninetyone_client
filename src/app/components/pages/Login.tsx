@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { ILogin } from "../../types/user/user.interface";
+import { ILogin } from "../../types/auth/auth.interface.ts";
 import { refresh } from "../../types/auth/auth.slice";
 import { useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../types/auth/auth.api.slice";
@@ -14,18 +14,16 @@ export default function Login() {
   const {
     register,
     handleSubmit,
-    formState: {  },
+    // formState: {  },
   } = useForm<ILogin>();
   const onSubmit = async (data: ILogin) => {
-    document.title = "login page";
-
     try {
       const loginResponce = await login(data).unwrap();
 
       dispatch(refresh({ token: loginResponce, user: null }));
 
-      navigate("/profile");
-    } catch (err: any) {
+      navigate("/");
+    } catch (err) {
       // catch errors or use formState: {errors}
       errRef.current?.focus();
     }

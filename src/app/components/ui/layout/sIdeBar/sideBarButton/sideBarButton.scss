@@ -1,0 +1,19 @@
+
+.sideBar__link {
+  margin: 0 auto 5%;
+  padding: 3% 2% 3% 6%;
+  border-radius: 10px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #3b3b3b;
+  }
+
+  &_active {
+    background-color: #414141;
+  }
+
+  &:first-child {
+    margin-top: 5%;
+  }
+}

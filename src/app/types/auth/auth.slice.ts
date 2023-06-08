@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {IAuth} from "../user/user.interface";
+import {IAuth} from "./auth.interface.ts";
 
 const initialState: IAuth = {user: null, token: null};
 
@@ -12,13 +12,17 @@ const authSlice = createSlice({
 
             if (user) {
                 state.user = user;
+            } else {
+                state.user = null;
             }
 
-            state.token = token;
+            if (token) {
+                state.token = token;
+            }
         },
         logOut: (state) => {
-            state.user = null;
             state.token = null;
+            state.user = null;
         },
     },
 });

@@ -1,5 +1,5 @@
 import { apiSlice } from "../../api/api.slice";
-import { ILogin, IToken, IUserDetails } from "../user/user.interface";
+import { ILogin, IToken, IUserDetails } from "./auth.interface.ts";
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

@@ -1,6 +1,6 @@
-import { IGroup } from "../group.interface";
-import { Role } from "../role.enum";
-import { ISubmittedLab } from "../submittedLab.interface";
+import { IGroup } from "../group/group.interface.ts";
+import { Role } from "../role.enum.ts";
+import { ISubmittedLab } from "../submittedLab.interface.ts";
 
 export interface IUser {
   id: string;

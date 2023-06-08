@@ -18,7 +18,8 @@
     "react-hook-form": "^7.44.3",
     "react-redux": "^8.0.7",
     "react-router-dom": "^6.11.2",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "sass": "^1.62.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
