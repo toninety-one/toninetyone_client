@@ -1,14 +1,16 @@
 import {IGroup} from "../group/group.interface.ts";
-import {ILabWork} from "../labWork.interface.ts";
+import {ILabWork} from "../labWork/labWork.interface.ts";
 
-export interface IDisciplineLookup {
-    id: string;
+export interface IDisciplineCreate {
+    userId: string;
     title: string;
 }
 
-export interface IDisciplineUpdate extends IDisciplineLookup{
-    userId: string;
+export interface IDisciplineUpdate extends IDisciplineCreate {
+    id: string;
 }
+
+export type IDisciplineLookup = Omit<IDisciplineUpdate, "userId">
 
 export interface IDiscipline extends IDisciplineLookup {
     userId: string;

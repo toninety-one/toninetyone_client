@@ -1,4 +1,4 @@
-import {IDiscipline} from "../Discipline/discipline.interface.ts";
+import {IDiscipline} from "../discipline/discipline.interface.ts";
 import {IUser} from "../auth/auth.interface.ts";
 
 export interface IGroupLookup {

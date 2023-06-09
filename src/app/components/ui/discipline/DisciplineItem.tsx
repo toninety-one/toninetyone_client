@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {IDisciplineLookup} from "../../../types/Discipline/discipline.interface.ts";
+import {IDisciplineLookup} from "../../../types/discipline/discipline.interface.ts";
 
 const DisciplineItem = ({item}: { item: IDisciplineLookup }) => {
     return (<div>

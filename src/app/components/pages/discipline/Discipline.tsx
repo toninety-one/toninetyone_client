@@ -1,9 +1,9 @@
-import {useGetDisciplinesQuery} from "../../types/Discipline/discipline.api.slice.ts";
-import DisciplineItem from "../ui/discipline/DisciplineItem.tsx";
+import {useGetDisciplinesQuery} from "../../../types/discipline/discipline.api.slice.ts";
+import DisciplineItem from "../../ui/discipline/DisciplineItem.tsx";
 
 const Discipline = () => {
 
-    const {data, isLoading} = useGetDisciplinesQuery(null, {refetchOnMountOrArgChange: true});
+    const {data, isLoading} = useGetDisciplinesQuery(null, {refetchOnMountOrArgChange: true, refetchOnFocus: true,});
 
     return isLoading ? (<div>loading</div>) : (
         <div>

@@ -2,11 +2,11 @@ import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import {setupListeners} from "@reduxjs/toolkit/query";
 import storage from "redux-persist/lib/storage";
 import {FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE,} from "redux-persist";
-import useCartSlice from "./types/cart/cart.slice";
 import {identityApi} from "./types/identity.api";
 import {apiSlice} from "./api/api.slice";
 import authSlice from "./types/auth/auth.slice";
 import {groupApiSlice} from "./types/group/group.api.slice.ts";
+import {labWorkApiSlice} from "./types/labWork/labWork.api.slice.ts";
 
 const persistConfig = {
     key: "root",
@@ -15,11 +15,11 @@ const persistConfig = {
 };
 
 export const rootReducers = combineReducers({
-    cart: useCartSlice.reducer,
     auth: authSlice,
     [identityApi.reducerPath]: identityApi.reducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
     [groupApiSlice.reducerPath]: groupApiSlice.reducer,
+    [labWorkApiSlice.reducerPath]: labWorkApiSlice.reducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);

@@ -10,8 +10,11 @@ const baseQuery = fetchBaseQuery({
         if (token) {
             headers.set("Authorization", `Bearer ${token.accessToken}`);
         }
-        headers.set("Accept", "application/json");
-        headers.set("Content-type", "application/json");
+
+        if (!headers.has("Content-Type")) {
+            headers.set("Accept", "application/json");
+            headers.set("Content-Type", "application/json");
+        }
 
         return headers;
     },
@@ -31,7 +34,6 @@ const baseQueryWithReAuth = async (
             {
                 url: "/identity/refresh",
                 method: "POST",
-                // body: { accessToken: "", refreshToken: "" },
                 body: body,
             },
             api,

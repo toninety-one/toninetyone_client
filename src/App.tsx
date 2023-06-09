@@ -7,12 +7,15 @@ import RequireAuth from "./app/components/ui/layout/RequireAuth";
 import Group from "./app/components/pages/Group.tsx";
 import GroupDetails from "./app/components/pages/GroupDetails.tsx";
 import {Role} from "./app/types/role.enum.ts";
-import Discipline from "./app/components/pages/Discipline.tsx";
-import DisciplineDetails from "./app/components/pages/DisciplineDetails.tsx";
+import Discipline from "./app/components/pages/discipline/Discipline.tsx";
+import DisciplineDetails from "./app/components/pages/discipline/disciplineDetails/DisciplineDetails.tsx";
 import "./global.scss";
 import About from "./app/components/pages/About.tsx";
 import LogOut from "./app/components/pages/LogOut.tsx";
 import Users from "./app/components/pages/Users.tsx";
+import DisciplineDetailsManager
+    from "./app/components/pages/discipline/disciplineDetails/disciplineDetailsManager/DIsciplineDetailsManager.tsx";
+import DisciplineCreateLab from "./app/components/pages/discipline/disciplineDetails/disciplineCreateLab/DisciplineCreateLab.tsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -29,6 +32,11 @@ const router = createBrowserRouter(
                 {/*<Route path="profile" element={<Profile/>}/>*/}
                 <Route path="discipline" element={<Discipline/>}/>
                 <Route path="discipline/:disciplineId" element={<DisciplineDetails/>}/>
+                <Route path="discipline/:disciplineId/:labId" element={<div>lab</div>}/>
+            </Route>
+            <Route element={<RequireAuth roles={[Role.Admin, Role.Teacher]}/>}>
+                <Route path="discipline/:disciplineId/manager" element={<DisciplineDetailsManager/>}/>
+                <Route path="discipline/:disciplineId/createLab" element={<DisciplineCreateLab/>}/>
             </Route>
             <Route element={<RequireAuth roles={[Role.Admin]}/>}>
                 <Route path="group" element={<Group/>}/>
