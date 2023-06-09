@@ -1,25 +1,17 @@
 import {apiSlice} from "../../api/api.slice.ts";
-import {ILabWorkCreate} from "./labWork.interface.ts";
 
 export const labWorkApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        createLabWork: builder.mutation<string, ILabWorkCreate>({
-            query: (body: ILabWorkCreate) => ({
+        createLabWork: builder.mutation<string, FormData>({
+            query: (body: FormData) => ({
                 url: "/labWork",
                 method: "POST",
-                body: () => {
-                    const formData = new FormData();
-                    formData.append("title", body.title)
-                    formData.append("disciplineId", body.disciplineId)
-                    formData.append("details", body.details)
-                    body.files.forEach((file) => {
-                        formData.append(`files`, file, file.name);
-                    });
-                    return formData;
-                },
+                body: body,
                 headers: {
-                    "content-type": "multipart/form-data: boundary=00000013232213132132",
+                    "content-type": "multipart/form-data: boundary=--14737809831466499882746641449.",
+                    'Accept': '*/*',
                 },
+                formData: true,
             }),
         }),
     }),

@@ -2,6 +2,8 @@ import {Link, useParams} from "react-router-dom";
 import {useGetDisciplineByIdQuery,} from "../../../../types/discipline/discipline.api.slice.ts";
 import Loader from "../../../ui/loader/Loader.tsx";
 import {useEffect} from "react";
+import "./disciplineDetails.scss"
+import LabWorkItem from "../../../ui/labWork/LabworkItem.tsx";
 
 const DisciplineDetails = () => {
 
@@ -27,12 +29,20 @@ const DisciplineDetails = () => {
         return <Loader/>
     }
 
-    return (
-        <div>
-            <Link to={"manager"}>manage</Link>
-            <br/>
-            <Link to={"createLab"}>create lab</Link>
-            <pre>{JSON.stringify(data, null, 2)}</pre>
+    return isLoading ? (<Loader/>) : (
+        <div className={"disciplineDetails__container"}>
+
+            <div className={"disciplineDetails__title"}>
+                Лабораторные работы
+            </div>
+            <div className={"disciplineDetails__controls"}>
+                <Link to={"manager"}>manage</Link>
+                <Link to={"createLab"}>create lab</Link>
+            </div>
+
+            {data?.labWorks && data.labWorks.length > 0 ? data?.labWorks?.map(l => <LabWorkItem key={l.id}
+                                                                                                item={l}></LabWorkItem>) :
+                <div>дисциплин нет </div>}
         </div>
     );
 };

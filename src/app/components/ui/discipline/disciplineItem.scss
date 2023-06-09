@@ -1,0 +1,22 @@
+.discipline__item {
+  padding: 0.4% 2%;
+  font-size: 25px;
+  border-radius: 10px;
+  margin: 0.6% 0;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #333333
+  }
+}
+
+.discipline__line {
+  background-color: #414141;
+  width: 98%;
+  margin: 0 auto;
+  height: 2px;
+
+  &:last-child {
+    visibility: hidden;
+  }
+}
