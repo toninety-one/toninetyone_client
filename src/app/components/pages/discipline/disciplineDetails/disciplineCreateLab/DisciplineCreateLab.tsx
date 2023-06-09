@@ -26,6 +26,7 @@ function DisciplineCreateLab() {
         files.forEach(file => {
             formData.append(`files`, file, file.name);
         });
+
         formData.append("details", data.details)
         formData.append("title", data.title)
         formData.append("disciplineId", disciplineId ? disciplineId : "")

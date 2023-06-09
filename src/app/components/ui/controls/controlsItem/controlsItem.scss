@@ -1,0 +1,12 @@
+.controls__item {
+  padding: 0.5% 1%;
+  margin: 1% 1% 0 0;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  color: #0A0A0A;
+
+  &:hover{
+    cursor: pointer;
+    background-color: #9f9f9f;
+  }
+}

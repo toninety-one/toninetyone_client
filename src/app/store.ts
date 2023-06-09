@@ -6,7 +6,6 @@ import {identityApi} from "./types/identity.api";
 import {apiSlice} from "./api/api.slice";
 import authSlice from "./types/auth/auth.slice";
 import {groupApiSlice} from "./types/group/group.api.slice.ts";
-import {labWorkApiSlice} from "./types/labWork/labWork.api.slice.ts";
 
 const persistConfig = {
     key: "root",
@@ -19,7 +18,6 @@ export const rootReducers = combineReducers({
     [identityApi.reducerPath]: identityApi.reducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
     [groupApiSlice.reducerPath]: groupApiSlice.reducer,
-    [labWorkApiSlice.reducerPath]: labWorkApiSlice.reducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);

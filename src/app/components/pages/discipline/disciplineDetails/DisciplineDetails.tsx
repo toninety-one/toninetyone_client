@@ -1,13 +1,19 @@
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useGetDisciplineByIdQuery,} from "../../../../types/discipline/discipline.api.slice.ts";
 import Loader from "../../../ui/loader/Loader.tsx";
 import {useEffect} from "react";
 import "./disciplineDetails.scss"
-import LabWorkItem from "../../../ui/labWork/LabworkItem.tsx";
+import ListItem from "../../../ui/list/listItem/ListItem.tsx";
+import List from "../../../ui/list/List.tsx";
+import ControlsContainer from "../../../ui/controls/ControlsContainer.tsx";
+import ControlsItem from "../../../ui/controls/controlsItem/ControlsItem.tsx";
+import useAuth from "../../../../hooks/useAuth.ts";
+import {Role} from "../../../../types/role.enum.ts";
 
 const DisciplineDetails = () => {
 
     const {disciplineId} = useParams();
+    const auth = useAuth()
 
     const {
         data,
@@ -30,20 +36,17 @@ const DisciplineDetails = () => {
     }
 
     return isLoading ? (<Loader/>) : (
-        <div className={"disciplineDetails__container"}>
+        <List title={"Лабораторные работы"}>
+            {auth.user?.userRole != Role.User ? <ControlsContainer>
+                    <ControlsItem title={"Управление"} path={"manager"}/>
+                    <ControlsItem title={"Создать лабораторную работу"} path={"createLab"}/>
+                </ControlsContainer>
+                : <></>}
 
-            <div className={"disciplineDetails__title"}>
-                Лабораторные работы
-            </div>
-            <div className={"disciplineDetails__controls"}>
-                <Link to={"manager"}>manage</Link>
-                <Link to={"createLab"}>create lab</Link>
-            </div>
-
-            {data?.labWorks && data.labWorks.length > 0 ? data?.labWorks?.map(l => <LabWorkItem key={l.id}
-                                                                                                item={l}></LabWorkItem>) :
+            {data?.labWorks && data.labWorks.length > 0 ? data?.labWorks?.map(l => <ListItem key={l.id} title={l.title}
+                                                                                             path={`/labwork/${l.id}`}></ListItem>) :
                 <div>дисциплин нет </div>}
-        </div>
+        </List>
     );
 };
 export default DisciplineDetails;
