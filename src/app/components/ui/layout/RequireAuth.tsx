@@ -4,20 +4,27 @@ import useAuth from "../../../hooks/useAuth";
 import {refresh} from "../../../types/auth/auth.slice";
 import {useGetUserDataQuery} from "../../../types/auth/auth.api.slice";
 import {useDispatch} from "react-redux";
+import Loader from "../loader/Loader.tsx";
 
 const RequireAuth = ({roles}: { roles?: Role[] }) => {
     const location = useLocation();
     const dispatch = useDispatch();
-
     const {token} = useAuth();
-    const {data, isLoading} = useGetUserDataQuery(null);
+    const {data, isLoading, refetch, isFetching} = useGetUserDataQuery(null, {
+        refetchOnMountOrArgChange: true,
+        refetchOnFocus: true
+    });
 
     dispatch(refresh({token, user: data}));
 
     const {user} = useAuth();
 
     if (isLoading) {
-        return <div>loading</div>;
+        if (!isFetching) {
+            refetch()
+        }
+
+        return <Loader/>;
     }
 
     if (!token || !user || !user.userRole) {

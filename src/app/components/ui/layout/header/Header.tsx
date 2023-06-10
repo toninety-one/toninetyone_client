@@ -1,9 +1,11 @@
 import "./header.scss"
 
 const Header = () => {
+
     return (
         <div id="header">
-            toninety.one
+            <div className="header__name">toninety.one</div>
+            <div className="header__title"></div>
         </div>
     );
 }

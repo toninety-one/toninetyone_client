@@ -9,12 +9,13 @@ import {IDisciplineUpdate} from "../../../../../types/discipline/discipline.inte
 import {useEffect} from "react";
 import Loader from "../../../../ui/loader/Loader.tsx";
 import {Role} from "../../../../../types/role.enum.ts";
+import useHeader from "../../../../../hooks/useHeader.ts";
 
 const DisciplineDetailsManager = () => {
     const auth = useAuth();
 
     const {disciplineId} = useParams();
-    console.log(disciplineId)
+
     const navigate = useNavigate();
     const {
         data,
@@ -25,6 +26,8 @@ const DisciplineDetailsManager = () => {
     const [deleteDiscipline, {isLoading: deleteLoading}] = useDeleteDisciplineMutation();
     const [updateDiscipline] = useUpdateDisciplineMutation();
 
+    useHeader(data?.title ? data.title : "Дисциплина - управление")
+
     const {register, handleSubmit} = useForm<IDisciplineUpdate>({
         defaultValues: {
             id: disciplineId,
@@ -32,8 +35,6 @@ const DisciplineDetailsManager = () => {
             title: data?.title
         }
     });
-
-    console.log(isFetching)
 
     useEffect(() => {
         if (isFetching) {
@@ -45,9 +46,6 @@ const DisciplineDetailsManager = () => {
         return <Loader/>
     }
 
-
-    console.log(data)
-
     const onSubmit = async () => {
         deleteDiscipline(disciplineId ? disciplineId : "").unwrap().then(() => {
             refetch();
@@ -58,7 +56,6 @@ const DisciplineDetailsManager = () => {
         formBody.userId = formBody.userId ? formBody.userId : ""
         updateDiscipline(formBody)
         refetch()
-        console.log(formBody)
     };
 
     if (deleteLoading) {

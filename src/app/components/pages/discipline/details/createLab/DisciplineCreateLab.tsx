@@ -3,8 +3,11 @@ import useAuth from "../../../../../hooks/useAuth.ts";
 import {ILabWorkCreate} from "../../../../../types/labWork/labWork.interface.ts";
 import {useForm} from "react-hook-form";
 import {useParams} from "react-router-dom";
+import useHeader from "../../../../../hooks/useHeader.ts";
 
 function DisciplineCreateLab() {
+    useHeader("Создание лабораторной работы")
+
     const [fileList, setFileList] = useState<FileList | null>(null);
     const auth = useAuth()
 

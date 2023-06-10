@@ -1,7 +1,8 @@
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../../hooks/useAuth.ts";
+import useHeader from "../../../hooks/useHeader.ts";
 
 const Profile = () => {
-
+    useHeader("Профиль")
     const auth = useAuth();
 
     return (

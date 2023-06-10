@@ -9,6 +9,8 @@ import ControlsContainer from "../../../ui/controls/ControlsContainer.tsx";
 import ControlsItem from "../../../ui/controls/controlsItem/ControlsItem.tsx";
 import useAuth from "../../../../hooks/useAuth.ts";
 import {Role} from "../../../../types/role.enum.ts";
+import useHeader from "../../../../hooks/useHeader.ts";
+import NotEnoughItems from "../../../ui/notEnoughtItems/NotEnoughItems.tsx";
 
 const DisciplineDetails = () => {
 
@@ -31,6 +33,8 @@ const DisciplineDetails = () => {
         }
     })
 
+    useHeader(data?.title ? data.title : "Дисциплина")
+
     if (isLoading) {
         return <Loader/>
     }
@@ -45,7 +49,7 @@ const DisciplineDetails = () => {
 
             {data?.labWorks && data.labWorks.length > 0 ? data?.labWorks?.map(l => <ListItem key={l.id} title={l.title}
                                                                                              path={`/labwork/${l.id}`}></ListItem>) :
-                <div>дисциплин нет </div>}
+                <NotEnoughItems title={"Лабораторных работ нет"}/>}
         </List>
     );
 };

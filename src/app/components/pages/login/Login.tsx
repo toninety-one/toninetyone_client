@@ -7,8 +7,11 @@ import {useLoginMutation} from "../../../types/auth/auth.api.slice.ts";
 import {useDispatch} from "react-redux";
 import "./login.scss"
 import Loader from "../../ui/loader/Loader.tsx";
+import useHeader from "../../../hooks/useHeader.ts";
 
 export default function Login() {
+    useHeader("Вход")
+
     const errRef = useRef<HTMLInputElement>(null);
     const navigate = useNavigate();
     const [login, {isLoading}] = useLoginMutation();

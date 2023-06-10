@@ -18,6 +18,8 @@ const authSlice = createSlice({
 
             if (token) {
                 state.token = token;
+            } else {
+                state.token = null
             }
         },
         logOut: (state) => {

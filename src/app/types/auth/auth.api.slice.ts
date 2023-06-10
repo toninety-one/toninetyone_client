@@ -15,7 +15,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 url: "/User",
                 method: "GET",
             }),
-            // keepUnusedDataFor: 1,
         }),
         getUser: builder.mutation<IUserDetails, null>({
             query: () => ({

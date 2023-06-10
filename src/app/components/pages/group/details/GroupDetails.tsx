@@ -3,9 +3,10 @@ import {
     useAddDisciplineToGroupMutation,
     useDeleteGroupMutation,
     useGetGroupByIdQuery
-} from "../../types/group/group.api.slice.ts";
+} from "../../../../types/group/group.api.slice.ts";
 import {useForm} from "react-hook-form";
-import {IGroupDiscipline} from "../../types/group/group.interface.ts";
+import {IGroupDiscipline} from "../../../../types/group/group.interface.ts";
+import useHeader from "../../../../hooks/useHeader.ts";
 
 const GroupDetails = () => {
     const {groupId} = useParams();
@@ -27,10 +28,10 @@ const GroupDetails = () => {
 
         data.groupId = groupId ? groupId : "";
         addDiscipline(data)
-        console.log(data)
     };
 
     console.log(errors);
+    useHeader(data?.title ? data.title : "Дисциплина")
 
     return isLoading ? (<div>loading</div>) : (
         <div>

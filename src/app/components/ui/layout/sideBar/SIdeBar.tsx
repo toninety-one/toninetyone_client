@@ -3,8 +3,6 @@ import SideBarButton from "./sideBarButton/sideBarButton.tsx";
 import {Role} from "../../../../types/role.enum.ts";
 
 const SideBar = ({role}: { role: Role }) => {
-    console.log(role)
-
     return (
         <div id="sideBar__container">
             <div className={"sideBar__menu"}>

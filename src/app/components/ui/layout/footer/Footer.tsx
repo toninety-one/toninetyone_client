@@ -4,7 +4,7 @@ const Footer = () => {
 
     return (
         <div id="footer">
-            {document.title}
+            toninety.one
         </div>
     );
 }

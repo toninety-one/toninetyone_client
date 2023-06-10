@@ -8,8 +8,11 @@ import ControlsContainer from "../../ui/controls/ControlsContainer.tsx";
 import ControlsItem from "../../ui/controls/controlsItem/ControlsItem.tsx";
 import {Role} from "../../../types/role.enum.ts";
 import useAuth from "../../../hooks/useAuth.ts";
+import useHeader from "../../../hooks/useHeader.ts";
+import NotEnoughItems from "../../ui/notEnoughtItems/NotEnoughItems.tsx";
 
 const Discipline = () => {
+    useHeader("Дисциплины")
 
     const {data, isLoading, isFetching, refetch} = useGetDisciplinesQuery(null, {
         refetchOnMountOrArgChange: true,
@@ -33,7 +36,7 @@ const Discipline = () => {
             {data?.disciplines && data.disciplines.length > 0 ? data?.disciplines?.map(d => <ListItem key={d.id}
                                                                                                       title={d.title}
                                                                                                       path={`/discipline/${d.id}`}></ListItem>) :
-                <div>дисциплин нет </div>}
+                <NotEnoughItems title={"Дисциплин нет"}/>}
         </List>
     );
 };
