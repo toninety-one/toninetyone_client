@@ -1,6 +1,6 @@
 import "./sideBar.scss";
 import SideBarButton from "./sideBarButton/sideBarButton.tsx";
-import {Role} from "../../../../types/role.enum.ts";
+import {Role} from "../../../../types/auth/role.enum.ts";
 
 const SideBar = ({role}: { role: Role }) => {
     return (

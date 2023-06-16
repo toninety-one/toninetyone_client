@@ -1,5 +1,6 @@
 .list__container {
   margin: 2% 3%;
+  max-height: 100%;
 
   .list__title {
     padding-left: 1%;
@@ -10,5 +11,8 @@
 
   .disciplineDetails__controls {
     padding: 1%;
+  }
+
+  .list__children_collapsable{
   }
 }

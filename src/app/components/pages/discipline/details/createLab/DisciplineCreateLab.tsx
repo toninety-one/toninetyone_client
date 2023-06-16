@@ -34,7 +34,7 @@ function DisciplineCreateLab() {
         formData.append("title", data.title)
         formData.append("disciplineId", disciplineId ? disciplineId : "")
 
-        await fetch('https://localhost:7010/labwork', {
+        await fetch(import.meta.env.VITE_API_URL + "/labwork", {
             method: 'POST',
             body: formData,
             headers: {

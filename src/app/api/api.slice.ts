@@ -2,7 +2,7 @@ import {createApi, FetchArgs, fetchBaseQuery,} from "@reduxjs/toolkit/query/reac
 import {logOut, refresh} from "../types/auth/auth.slice";
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: "https://localhost:7010",
+    baseUrl: import.meta.env.VITE_API_URL,
     credentials: "include",
     prepareHeaders: (headers: Headers, {getState}: any): Headers => {
         const token = getState().auth.token;
@@ -27,7 +27,7 @@ const baseQueryWithReAuth = async (
 ) => {
     let result = await baseQuery(args, api, extraOptions);
 
-    if (result?.error) {
+    if (result?.error?.status == 401 || result?.error?.status == 403 || result?.error?.status == "FETCH_ERROR") {
         const body = {...api.getState().auth.token};
         // send refresh token to get new access token
         const refreshResponce = await baseQuery(

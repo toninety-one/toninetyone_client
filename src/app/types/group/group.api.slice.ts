@@ -1,5 +1,5 @@
 import {apiSlice} from "../../api/api.slice.ts";
-import {IGroupDetails, IGroupDiscipline, IGroupLookup} from "./group.interface.ts";
+import {IGroupCreate, IGroupDetails, IGroupDiscipline, IGroupLookup} from "./group.interface.ts";
 
 export const groupApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -15,20 +15,34 @@ export const groupApiSlice = apiSlice.injectEndpoints({
                 method: "GET",
             }),
         }),
-        createGroup: builder.mutation<string, IGroupDetails>({// TODO IGroupCreate
-            query: () => ({
+        createGroup: builder.mutation<string, IGroupCreate>({
+            query: (body) => ({
                 url: "/group",
-                method: "POST",
-            }),
-        }),
-        addDisciplineToGroup: builder.mutation<string, IGroupDiscipline>({// TODO IGroupCreate
-            query: (body: IGroupDiscipline) => ({
-                url: "/DisciplineGroup/AddDisciplineGroup",
                 method: "POST",
                 body: body,
             }),
         }),
-        // update
+        addDisciplineToGroup: builder.mutation<string, IGroupDiscipline>({
+            query: (body: IGroupDiscipline) => ({
+                url: "/DisciplineGroup",
+                method: "POST",
+                body: body,
+            }),
+        }),
+        deleteDisciplineFromGroup: builder.mutation<string, IGroupDiscipline>({
+            query: (body: IGroupDiscipline) => ({
+                url: "/DisciplineGroup",
+                method: "DELETE",
+                body: body,
+            }),
+        }),
+        updateGroup: builder.mutation<null, IGroupLookup>({
+            query: (body) => ({
+                url: `/group`,
+                method: "PUT",
+                body: body,
+            }),
+        }),
         deleteGroup: builder.mutation<null, string>({
             query: (id: string) => ({
                 url: `/group/${id}`,
@@ -42,5 +56,7 @@ export const {
     useGetGroupsQuery,
     useGetGroupByIdQuery,
     useDeleteGroupMutation,
-    useAddDisciplineToGroupMutation
+    useAddDisciplineToGroupMutation,
+    useCreateGroupMutation,
+    useUpdateGroupMutation
 } = groupApiSlice;

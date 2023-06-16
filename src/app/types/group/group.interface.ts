@@ -1,9 +1,12 @@
 import {IDiscipline} from "../discipline/discipline.interface.ts";
 import {IUser} from "../auth/auth.interface.ts";
 
-export interface IGroupLookup {
-    id: string;
+export interface IGroupCreate {
     title: string;
+}
+
+export interface IGroupLookup extends IGroupCreate {
+    id: string;
 }
 
 export interface IGroup extends IGroupLookup {

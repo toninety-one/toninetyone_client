@@ -1,5 +1,5 @@
 import {IGroup} from "../group/group.interface.ts";
-import {Role} from "../role.enum.ts";
+import {Role} from "./role.enum.ts";
 import {ISubmittedLab} from "../submittedLab.interface.ts";
 
 export interface IUser {
@@ -10,8 +10,14 @@ export interface IUser {
     groupId?: string;
 }
 
+export interface IUserLookupDto extends Omit<IUser, "groupId"> {
+    userGroup: string;
+    userRole: Role
+}
+
 export interface IUserDetails extends Omit<IUser, "groupID"> {
     userRole: Role;
+    userName: string;
     userGroup: IGroup;
     lastSubmittedLabs: ISubmittedLab[];
 }
@@ -33,4 +39,10 @@ export interface ILogin {
 
 export interface IAuthResponce extends IToken {
     user: IUserDetails;
+}
+
+export interface IUpdateIdentity {
+    id: string;
+    userName: string;
+    userRole: Role
 }

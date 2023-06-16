@@ -1,5 +1,5 @@
 import {apiSlice} from "../../api/api.slice";
-import {ILogin, IToken, IUser, IUserDetails} from "./auth.interface.ts";
+import {ILogin, IToken, IUpdateIdentity, IUser, IUserDetails, IUserLookupDto} from "./auth.interface.ts";
 
 export const authApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -10,26 +10,34 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 body: {...credentials},
             }),
         }),
-        getUserData: builder.query<IUserDetails, null>({
-            query: () => ({
-                url: "/User",
+        getUser: builder.query<IUserDetails, null | string>({
+            query: (id: string | null) => ({
+                url: `/User${id && id.length > 0 ? `?id=${id}` : ""}`,
                 method: "GET",
             }),
         }),
-        getUser: builder.mutation<IUserDetails, null>({
-            query: () => ({
-                url: "/User",
-                method: "GET",
-            }),
-        }),
-        getAllUsers: builder.query<{ users: IUser[] }, null>({
+        getAllUsers: builder.query<{ users: IUserLookupDto[] }, null>({
             query: () => ({
                 url: "/User/GetAll",
                 method: "GET",
             }),
         }),
+        updateIdentityUser: builder.mutation<null, IUpdateIdentity>({
+            query: (body) => ({
+                url: "/User/i",
+                method: "PUT",
+                body: body
+            })
+        }),
+        updateUser: builder.mutation<null, IUser>({
+            query: (body) => ({
+                url: "/User",
+                method: "PUT",
+                body: body
+            })
+        })
     }),
 });
 
-export const {useLoginMutation, useGetUserDataQuery, useGetUserMutation, useGetAllUsersQuery} =
+export const {useLoginMutation, useGetUserQuery, useUpdateIdentityUserMutation, useGetAllUsersQuery, useUpdateUserMutation} =
     authApiSlice;

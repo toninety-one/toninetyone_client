@@ -8,7 +8,7 @@ import List from "../../../ui/list/List.tsx";
 import ControlsContainer from "../../../ui/controls/ControlsContainer.tsx";
 import ControlsItem from "../../../ui/controls/controlsItem/ControlsItem.tsx";
 import useAuth from "../../../../hooks/useAuth.ts";
-import {Role} from "../../../../types/role.enum.ts";
+import {Role} from "../../../../types/auth/role.enum.ts";
 import useHeader from "../../../../hooks/useHeader.ts";
 import NotEnoughItems from "../../../ui/notEnoughtItems/NotEnoughItems.tsx";
 
@@ -42,7 +42,7 @@ const DisciplineDetails = () => {
     return isLoading ? (<Loader/>) : (
         <List title={"Лабораторные работы"}>
             {auth.user?.userRole != Role.User ? <ControlsContainer>
-                    <ControlsItem title={"Управление"} path={"manager"}/>
+                    <ControlsItem title={"Управление"} path={"create"}/>
                     <ControlsItem title={"Создать лабораторную работу"} path={"createLab"}/>
                 </ControlsContainer>
                 : <></>}

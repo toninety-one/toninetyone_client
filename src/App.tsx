@@ -6,7 +6,7 @@ import Layout from "./app/components/ui/layout/layout/Layout.tsx";
 import RequireAuth from "./app/components/ui/layout/RequireAuth";
 import Group from "./app/components/pages/group/Group.tsx";
 import GroupDetails from "./app/components/pages/group/details/GroupDetails.tsx";
-import {Role} from "./app/types/role.enum.ts";
+import {Role} from "./app/types/auth/role.enum.ts";
 import Discipline from "./app/components/pages/discipline/Discipline.tsx";
 import DisciplineDetails from "./app/components/pages/discipline/details/DisciplineDetails.tsx";
 import "./global.scss";
@@ -17,6 +17,8 @@ import DisciplineDetailsManager from "./app/components/pages/discipline/details/
 import DisciplineCreateLab from "./app/components/pages/discipline/details/createLab/DisciplineCreateLab.tsx";
 import DisciplineManager from "./app/components/pages/discipline/manager/DisciplineManager.tsx";
 import LabWorkDetails from "./app/components/pages/labWork/details/LabWorkDetails.tsx";
+import UsersDetails from "./app/components/pages/users/details/UsersDetails.tsx";
+import CreateGroup from "./app/components/pages/group/create/CreateGroup.tsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -43,8 +45,11 @@ const router = createBrowserRouter(
 
             <Route element={<RequireAuth roles={[Role.Admin]}/>}>
                 <Route path="group" element={<Group/>}/>
-                <Route path="users" element={<Users/>}/>
+                <Route path="group/create" element={<CreateGroup/>}/>
                 <Route path="group/:groupId" element={<GroupDetails/>}/>
+
+                <Route path="users" element={<Users/>}/>
+                <Route path="users/:userId" element={<UsersDetails/>}/>
             </Route>
         </Route>
     )

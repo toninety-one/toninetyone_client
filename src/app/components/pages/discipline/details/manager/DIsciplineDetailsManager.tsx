@@ -2,13 +2,14 @@ import useAuth from "../../../../../hooks/useAuth.ts";
 import {useNavigate, useParams} from "react-router-dom";
 import {
     useDeleteDisciplineMutation,
-    useGetDisciplineByIdQuery, useUpdateDisciplineMutation
+    useGetDisciplineByIdQuery,
+    useUpdateDisciplineMutation
 } from "../../../../../types/discipline/discipline.api.slice.ts";
 import {useForm} from "react-hook-form";
 import {IDisciplineUpdate} from "../../../../../types/discipline/discipline.interface.ts";
 import {useEffect} from "react";
 import Loader from "../../../../ui/loader/Loader.tsx";
-import {Role} from "../../../../../types/role.enum.ts";
+import {Role} from "../../../../../types/auth/role.enum.ts";
 import useHeader from "../../../../../hooks/useHeader.ts";
 
 const DisciplineDetailsManager = () => {

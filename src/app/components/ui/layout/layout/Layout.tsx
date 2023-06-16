@@ -4,7 +4,7 @@ import SideBar from "../sideBar/SIdeBar.tsx";
 import Footer from "../footer/Footer.tsx";
 import "./layout.scss"
 import useAuth from "../../../../hooks/useAuth.ts";
-import {Role} from "../../../../types/role.enum.ts";
+import {Role} from "../../../../types/auth/role.enum.ts";
 
 const Layout = () => {
     const {pathname} = useLocation();
