@@ -18,6 +18,7 @@ const Discipline = () => {
         refetchOnMountOrArgChange: true,
         refetchOnFocus: true,
     });
+
     const auth = useAuth()
     useEffect(() => {
         if (isFetching) {
@@ -33,11 +34,11 @@ const Discipline = () => {
                 </ControlsContainer>
                 : <></>}
 
-            {data?.disciplines && data.disciplines.length > 0 ? data?.disciplines?.map(d => <ListItem key={d.id}
-                                                                                                      title={d.title}
-                                                                                                      path={`/discipline/${d.id}`}></ListItem>) :
+            {data?.disciplines && data.disciplines.length > 0 ? data?.disciplines?.map(d =>
+                    <ListItem key={d.id} title={d.title} path={`/discipline/${d.id}`}></ListItem>) :
                 <NotEnoughItems title={"Дисциплин нет"}/>}
         </List>
+
     );
 };
 export default Discipline;
