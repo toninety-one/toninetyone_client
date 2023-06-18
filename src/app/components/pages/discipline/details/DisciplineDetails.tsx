@@ -41,14 +41,15 @@ const DisciplineDetails = () => {
 
     return isLoading ? (<Loader/>) : (
         <List title={"Лабораторные работы"}>
-            {auth.user?.userRole != Role.User ? <ControlsContainer>
-                    <ControlsItem title={"Управление"} path={"create"}/>
+            {auth.user?.userRole != Role.User ?
+                <ControlsContainer>
+                    <ControlsItem title={"Управление"} path={"manager"}/>
                     <ControlsItem title={"Создать лабораторную работу"} path={"createLab"}/>
                 </ControlsContainer>
                 : <></>}
 
-            {data?.labWorks && data.labWorks.length > 0 ? data?.labWorks?.map(l => <ListItem key={l.id} title={l.title}
-                                                                                             path={`/labwork/${l.id}`}></ListItem>) :
+            {data?.labWorks && data.labWorks.length > 0 ? data?.labWorks?.map(l =>
+                    <ListItem key={l.id} title={l.title} path={`/labwork/${l.id}`}></ListItem>) :
                 <NotEnoughItems title={"Лабораторных работ нет"}/>}
         </List>
     );

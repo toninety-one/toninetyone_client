@@ -9,10 +9,6 @@ const CreateGroup = () => {
     const {register, handleSubmit} = useForm<IGroupCreate>()
     const [successText, setSuccessText] = useState("")
 
-    if (isLoading){
-        setSuccessText("")
-    }
-
     const onSubmit = async (data: IGroupCreate) => {
         await createGroup(data)
         setSuccessText("Группа успешно создана")

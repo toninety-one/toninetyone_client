@@ -15,8 +15,8 @@ const Profile = () => {
                     {auth.user?.lastName} {auth.user?.firstName} {auth.user?.middleName}
                 </div>
                 <div className={styles.profile__userdata}>
-                    {auth.user?.userRole ? `Роль: ${auth.user?.userRole}` : ""}
-                    {auth.user?.userGroup ? `Группа: ${auth.user?.userGroup}` : ""}
+                    <span className={styles.profile__dataParam}>{auth.user?.userRole ? `Роль: ${auth.user?.userRole}` : ""}</span>
+                    <span className={styles.profile__dataParam}>{auth.user?.userGroup ? `Группа: ${auth.user?.userGroup.title}` : ""}</span>
                 </div>
             </div>
             {favouriteDisciplines.length > 0 ?

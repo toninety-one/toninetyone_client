@@ -17,6 +17,14 @@
       margin-top: 1%;
 
       font-size: 18px;
+
+      .profile__dataParam {
+        padding-right: 1%;
+
+        &:last-child {
+          padding: 0;
+        }
+      }
     }
   }
 

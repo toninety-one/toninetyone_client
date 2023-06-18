@@ -7,7 +7,7 @@ export interface IUser {
     firstName: string;
     lastName: string;
     middleName?: string;
-    groupId?: string;
+    groupId?: string | null;
 }
 
 export interface IUserLookupDto extends Omit<IUser, "groupId"> {

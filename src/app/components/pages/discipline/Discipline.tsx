@@ -29,7 +29,7 @@ const Discipline = () => {
         <List title={"Все дисциплины"}>
 
             {auth.user?.userRole != Role.User ? <ControlsContainer>
-                    <ControlsItem title={"Управление"} path={"create"}/>
+                    <ControlsItem title={"Создать"} path={"create"}/>
                 </ControlsContainer>
                 : <></>}
 

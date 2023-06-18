@@ -5,17 +5,15 @@ import {useForm} from "react-hook-form";
 import {useParams} from "react-router-dom";
 import useHeader from "../../../../../hooks/useHeader.ts";
 
-function DisciplineCreateLab() {
+function SubmitLabWork() {
     useHeader("Создание лабораторной работы")
-
+    const {labId} = useParams();
     const [fileList, setFileList] = useState<FileList | null>(null);
     const auth = useAuth()
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFileList(e.target.files);
     };
-    const {disciplineId} = useParams();
-
     const {register, handleSubmit} = useForm<ILabWorkCreate>();
 
     const handleUploadClick = async (data: ILabWorkCreate) => {
@@ -31,17 +29,14 @@ function DisciplineCreateLab() {
 
         formData.append("details", data.details)
         formData.append("title", data.title)
-        formData.append("disciplineId", disciplineId ? disciplineId : "")
 
-        await fetch(import.meta.env.VITE_API_URL + "/labwork", {
+        await fetch(import.meta.env.VITE_API_URL + "/labwork/" + labId, {
             method: 'POST',
             body: formData,
             headers: {
                 "authorization": `bearer ${auth.token?.accessToken}`
             }
         })
-
-
     };
 
     const files = fileList ? [...fileList] : [];
@@ -67,4 +62,4 @@ function DisciplineCreateLab() {
     );
 }
 
-export default DisciplineCreateLab;
+export default SubmitLabWork;

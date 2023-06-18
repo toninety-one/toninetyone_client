@@ -9,13 +9,15 @@ interface Props {
 const SideBarButton = ({path, button_text}: Props) => {
     const navigate = useNavigate()
 
+    path = path.toLowerCase();
+
     let active = "";
 
-    if (location.pathname.includes(path)) {
+    if (location.pathname.toLowerCase().includes(path)) {
         active = " sideBar__link_active";
     }
 
-    if (location.pathname != "/" && path == "/") {
+    if (location.pathname.toLowerCase() != "/" && path == "/") {
         active = ""
     }
 

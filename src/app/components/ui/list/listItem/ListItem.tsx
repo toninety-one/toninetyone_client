@@ -1,17 +1,34 @@
 import {useNavigate} from "react-router-dom";
-import "./listItem.scss"
+import styles from"./listItem.module.scss"
 
-const ListItem = ({title, path}: { title: string, path: string }) => {
+type ListItemProps = {
+    title: string;
+    path?: string;
+    filePath?: string;
+    optionalText?: string;
+}
+
+const ListItem = ({title, path, filePath, optionalText}: ListItemProps) => {
     const navigate = useNavigate();
 
     return (
         <>
-            <div className={"list__item"} onClick={() => {
-                navigate(path)
+            <div className={styles.list__item} onClick={() => {
+                if (path) {
+                    navigate(path)
+                }
+
+                if (filePath) {
+                    const link = document.createElement('a');
+                    link.href = filePath;
+                    link.click();
+                }
             }}>
-                {title}
+
+                <div>{title}</div>
+                {optionalText ? (<div>{optionalText}</div>) : ""}
             </div>
-            <div className={"list__line"}/>
+            <div className={styles.list__line}/>
         </>
     );
 };

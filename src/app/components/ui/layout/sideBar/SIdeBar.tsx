@@ -20,6 +20,10 @@ const SideBar = ({role}: { role: Role }) => {
                     <SideBarButton button_text={"Пользователи"} path={"/users"}/>
                 )}
 
+                {role == Role.User && (
+                    <SideBarButton button_text={"Лабораторные работы"} path={"/labwork"}/>
+                )}
+
 
                 <SideBarButton button_text={"О проекте"} path={"/about"}/>
             </div>

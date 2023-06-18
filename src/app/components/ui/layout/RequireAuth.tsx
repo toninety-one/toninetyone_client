@@ -9,7 +9,9 @@ import Loader from "../loader/Loader.tsx";
 const RequireAuth = ({roles}: { roles?: Role[] }) => {
     const location = useLocation();
     const dispatch = useDispatch();
+
     const {token} = useAuth();
+
     const {data, isLoading, refetch, isFetching} = useGetUserQuery(null, {
         refetchOnMountOrArgChange: true,
         refetchOnFocus: true

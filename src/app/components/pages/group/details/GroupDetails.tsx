@@ -49,7 +49,7 @@ const GroupDetails = () => {
 
     useHeader(data?.title ? data.title : "Дисциплина")
 
-    return isLoading ? (<div>loading</div>) : (
+    return isLoading ? (<Loader/>) : (
         <div>
             <div>
                 <pre>{JSON.stringify(data, null, 2)}</pre>

@@ -1,91 +1,48 @@
 import useHeader from "../../../../hooks/useHeader.ts";
 import {FC} from "react";
 import {useParams} from "react-router-dom";
+import {useGetLabWorkByIdQuery} from "../../../../types/labWork/labwork.api.slice.ts";
+import Loader from "../../../ui/loader/Loader.tsx";
+import List from "../../../ui/list/List.tsx";
+import ListItem from "../../../ui/list/listItem/ListItem.tsx";
+import ControlsContainer from "../../../ui/controls/ControlsContainer.tsx";
+import ControlsItem from "../../../ui/controls/controlsItem/ControlsItem.tsx";
+import useAuth from "../../../../hooks/useAuth.ts";
+import {Role} from "../../../../types/auth/role.enum.ts";
 
 const LabWorkDetails: FC = () => {
     useHeader("Лабораторная работа")
     const {labId} = useParams();
-
-    // const [fileList, setFileList] = useState<FileList | null>(null);
-    // const auth = useAuth()
-    //
-    // const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    //     setFileList(e.target.files);
-    // };
-    // const {disciplineId} = useParams();
-    //
-    // const {register, handleSubmit} = useForm<ILabWorkCreate>();
-    //
-    //
-    // const handleUploadClick = async (data: ILabWorkCreate) => {
-    //     if (!fileList) {
-    //         return;
-    //     }
-    //
-    //     const formData = new FormData();
-    //
-    //     files.forEach(file => {
-    //         formData.append(`files`, file, file.name);
-    //     });
-    //
-    //     formData.append("details", data.details)
-    //     formData.append("title", data.title)
-    //     formData.append("disciplineId", disciplineId ? disciplineId : "")
-    //
-    //     await fetch(import.meta.env.VITE_API_URL + "/labwork", {
-    //         method: 'POST',
-    //         body: formData,
-    //         headers: {
-    //             "authorization": `bearer ${auth.token?.accessToken}`
-    //         }
-    //     })
-    //
-    //
-    // };
-    //
-    // const files = fileList ? [...fileList] : [];
-
+    const {user} = useAuth();
+    const {data, isLoading} = useGetLabWorkByIdQuery(labId ?? "");
 
     return (
         <div>
-            {labId}
+            {!isLoading ?
+                <div>
+                    <div>
+                        <pre>{JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                    <div>
+                        {user?.userRole == Role.User ? (
+                            <ControlsContainer>
+                                <ControlsItem title={"Загрузить готовую лабораторную работу"} path={"submit"}/>
+                            </ControlsContainer>) : ""}
+
+                        <List title={"Файлы лабораторной работы"}>
+
+                            {data?.files.map(f => <ListItem key={f.id} title={f.fileName}
+                                                            filePath={import.meta.env.VITE_API_URL + "/" + f.path}/>)}
+                        </List>
+                    </div>
+
+
+                </div> : <Loader/>}
+
+
         </div>
     )
 }
-//         <form onSubmit = {handleSubmit(handleUploadClick)}
-//     encType = "multipart/form-data" >
-//     <input type = "text"
-//     placeholder = "title"
-//     {...
-//         register("title", {})
-//     }
-//     />
-//     < br / >
-//     <input type = "text"
-//     placeholder = "details"
-//     {...
-//         register("details", {})
-//     }
-//     />
-//     < br / >
-//     <input type = "file"
-//     onChange = {handleFileChange}
-//     multiple / >
-//
-//     <ul>
-//         {
-//             files.map((file, i) => (
-//                 <li key = {i} >
-//                     {file.name} - {file.type}
-//                     < /li>
-//             ))
-//         }
-//     < /ul>
-//
-//     < button > Create < /button>
-//     < /form>
-// )
-//     ;
-// }
+
 
 export default LabWorkDetails;

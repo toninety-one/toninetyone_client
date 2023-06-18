@@ -1,9 +1,9 @@
-import "./controlsContainer.scss"
+import styles from "./controlsContainer.module.scss"
 import {PropsWithChildren} from "react";
 
 const ControlsContainer = ({children}: PropsWithChildren) => {
     return (
-        <div className={"controls__container"}>
+        <div className={styles.controls__container}>
             {children}
         </div>
     )
