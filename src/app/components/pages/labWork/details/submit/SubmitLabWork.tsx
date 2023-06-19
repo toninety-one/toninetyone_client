@@ -1,30 +1,29 @@
-import {ChangeEvent, useState} from 'react';
 import useAuth from "../../../../../hooks/useAuth.ts";
 import {ILabWorkCreate} from "../../../../../types/labWork/labWork.interface.ts";
 import {useForm} from "react-hook-form";
 import {useParams} from "react-router-dom";
 import useHeader from "../../../../../hooks/useHeader.ts";
+import useFormFiles from "../../../../../hooks/useFormFiles.ts";
+
 
 function SubmitLabWork() {
     useHeader("Создание лабораторной работы")
     const {labId} = useParams();
-    const [fileList, setFileList] = useState<FileList | null>(null);
     const auth = useAuth()
 
-    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setFileList(e.target.files);
-    };
+    const {files, handleFileChange, handleDelete} = useFormFiles()
+
     const {register, handleSubmit} = useForm<ILabWorkCreate>();
 
     const handleUploadClick = async (data: ILabWorkCreate) => {
-        if (!fileList) {
+        if (!files) {
             return;
         }
 
         const formData = new FormData();
 
         files.forEach(file => {
-            formData.append(`files`, file, file.name);
+            formData.append(`files`, file.file, file.file.name);
         });
 
         formData.append("details", data.details)
@@ -39,23 +38,25 @@ function SubmitLabWork() {
         })
     };
 
-    const files = fileList ? [...fileList] : [];
-
     return (
         <form onSubmit={handleSubmit(handleUploadClick)} encType="multipart/form-data">
             <input type="text" placeholder="title" {...register("title", {})} />
             <br/>
             <input type="text" placeholder="details" {...register("details", {})} />
             <br/>
-            <input type="file" onChange={handleFileChange} multiple/>
-
-            <ul>
-                {files.map((file, i) => (
-                    <li key={i}>
-                        {file.name} - {file.type}
-                    </li>
+            <input type="file" multiple onChange={handleFileChange}/>
+            <table>
+                {files.map(file => (
+                    <tr>
+                        <td key={file.id}>
+                            {file.file.name}
+                        </td>
+                        <td>
+                            <button onClick={() => handleDelete(file.id)}>Delete</button>
+                        </td>
+                    </tr>
                 ))}
-            </ul>
+            </table>
 
             <button>Create</button>
         </form>
