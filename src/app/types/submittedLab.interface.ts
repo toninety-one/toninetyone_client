@@ -6,3 +6,9 @@ export interface ISubmittedLab {
     editDate: string;
     mark?: string;
 }
+
+export interface ISubmittedLabDetailsLookupDto extends ISubmittedLab {
+    firstName: string
+    lastName: string
+    middleName: string
+}

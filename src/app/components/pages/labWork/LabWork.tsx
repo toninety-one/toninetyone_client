@@ -24,7 +24,7 @@ const LabWork = () => {
         <List title={"Лабораторные работы"}>
             {data?.labWorks && data.labWorks.length > 0 ? data?.labWorks?.map(l =>
                     <ListItem key={l.id} title={l.title} path={`/labWork/${l.id}`}
-                              optionalText={l.disciplineTitle}></ListItem>) :
+                              optionalText={(l.mark ? l.mark + " - " : "") + l.disciplineTitle}></ListItem>) :
                 <NotEnoughItems title={"Лабораторных работ нет"}/>}
         </List>
     );

@@ -21,11 +21,14 @@ import UsersDetails from "./app/components/pages/users/details/UsersDetails.tsx"
 import CreateGroup from "./app/components/pages/group/create/CreateGroup.tsx";
 import SubmitLabWork from "./app/components/pages/labWork/details/submit/SubmitLabWork.tsx";
 import LabWork from "./app/components/pages/labWork/LabWork.tsx";
+import FileUpload from "./app/components/FileUpload.tsx";
+import SubmittedLabDetails from "./app/components/pages/labWork/details/submittedLab/SubmittedLabDetails.tsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Layout/>}>
             {/* public rotes */}
+            <Route path="/test" element={<FileUpload/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/logout" element={<LogOut/>}/>
             <Route path="/about" element={<About/>}/>
@@ -37,7 +40,9 @@ const router = createBrowserRouter(
                 <Route path="discipline" element={<Discipline/>}/>
                 <Route path="discipline/:disciplineId" element={<DisciplineDetails/>}/>
                 <Route path="labWork/:labId" element={<LabWorkDetails/>}/>
+                <Route path="labWork/:labId/:subId" element={<SubmittedLabDetails/>}/>
             </Route>
+
             <Route element={<RequireAuth roles={[Role.User]}/>}>
                 <Route path="labWork" element={<LabWork/>}/>
                 <Route path="labWork/:labId/submit" element={<SubmitLabWork/>}/>

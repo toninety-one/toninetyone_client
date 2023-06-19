@@ -1,9 +1,9 @@
-import {ILabWork, ILabWorkLookupDto} from "./labWork.interface.ts";
+import {ILabWorkDetails, ILabWorkLookupDto} from "./labWork.interface.ts";
 import {apiSlice} from "../../api/api.slice.ts";
 
 export const labWorkApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getLabWorkById: builder.query<ILabWork, string>({
+        getLabWorkById: builder.query<ILabWorkDetails, string>({
             query: (id: string) => ({
                 url: `/labwork/${id}`,
                 method: "GET",
