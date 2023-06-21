@@ -12,7 +12,7 @@ function DisciplineCreateLab() {
 
     const {disciplineId} = useParams();
 
-    const {files, handleFileChange, handleDelete} = useFormFiles()
+    const {files, handleFileChange, handleDelete, getFilesFormData} = useFormFiles()
 
     const {register, handleSubmit} = useForm<ILabWorkCreate>();
 
@@ -21,11 +21,7 @@ function DisciplineCreateLab() {
             return;
         }
 
-        const formData = new FormData();
-
-        files.forEach(file => {
-            formData.append(`files`, file.file, file.file.name);
-        });
+        const formData = getFilesFormData();
 
         formData.append("details", data.details)
         formData.append("title", data.title)

@@ -20,8 +20,17 @@ const useFormFiles = () => {
         setFiles(updatedFiles);
     };
 
+    const getFilesFormData = () => {
+        const formData = new FormData();
 
-    return {files, handleFileChange, handleDelete};
+        files.forEach(file => {
+            formData.append(`files`, file.file, file.file.name);
+        });
+
+        return formData
+    }
+
+    return {files, handleFileChange, handleDelete, getFilesFormData};
 };
 
 export default useFormFiles;

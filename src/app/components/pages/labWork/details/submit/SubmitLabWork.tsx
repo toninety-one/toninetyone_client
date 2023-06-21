@@ -11,7 +11,7 @@ function SubmitLabWork() {
     const {labId} = useParams();
     const auth = useAuth()
 
-    const {files, handleFileChange, handleDelete} = useFormFiles()
+    const {files, handleFileChange, handleDelete, getFilesFormData} = useFormFiles()
 
     const {register, handleSubmit} = useForm<ILabWorkCreate>();
 
@@ -20,11 +20,7 @@ function SubmitLabWork() {
             return;
         }
 
-        const formData = new FormData();
-
-        files.forEach(file => {
-            formData.append(`files`, file.file, file.file.name);
-        });
+        const formData = getFilesFormData();
 
         formData.append("details", data.details)
         formData.append("title", data.title)
