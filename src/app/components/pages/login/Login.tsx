@@ -5,9 +5,10 @@ import {refresh} from "../../../types/auth/auth.slice.ts";
 import {useNavigate} from "react-router-dom";
 import {useLoginMutation} from "../../../types/auth/auth.api.slice.ts";
 import {useDispatch} from "react-redux";
-import "./login.scss"
 import Loader from "../../ui/loader/Loader.tsx";
 import useHeader from "../../../hooks/useHeader.ts";
+import styles from "./login.module.scss"
+import Button from "../../ui/button/button.tsx";
 
 export default function Login() {
     useHeader("Вход")
@@ -37,15 +38,25 @@ export default function Login() {
     return isLoading ? (
         <Loader/>
     ) : (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input type="text" placeholder="UserName" {...register("username", {})} />
-            <input
-                type="password"
-                placeholder="Password"
-                {...register("password", {})}
-            />
-
-            <input type="submit"/>
-        </form>
+        <div className={styles.login__container}>
+            <div className={styles.login__form}>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <h1>Вход</h1>
+                    <input
+                        className={styles.login__input}
+                        type="text"
+                        placeholder="UserName"
+                        {...register("username", {})}
+                    />
+                    <input
+                        className={styles.login__input}
+                        type="password"
+                        placeholder="Password"
+                        {...register("password", {})}
+                    />
+                    <Button button_text={"Войти"} button_type={"submit"}/>
+                </form>
+            </div>
+        </div>
     );
 }

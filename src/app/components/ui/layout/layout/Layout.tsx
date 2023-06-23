@@ -20,11 +20,11 @@ const Layout = () => {
                     <div id="sideBar">
                         <SideBar role={user?.userRole ? user.userRole : Role.User}/>
                     </div> : <></>}
-                <div id="body">
-                    <div className="body__container">
+                {!pathname.includes("/login") ? <div id="body">
+                    <div className={pathname}>
                         <Outlet/>
                     </div>
-                </div>
+                </div> : <Outlet/>}
             </main>
             <Footer/>
         </div>
