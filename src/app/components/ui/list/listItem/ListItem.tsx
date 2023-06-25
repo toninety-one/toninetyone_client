@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import styles from"./listItem.module.scss"
+import styles from "./listItem.module.scss"
 
 type ListItemProps = {
     title: string;

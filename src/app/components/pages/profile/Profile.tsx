@@ -13,8 +13,10 @@ const Profile = () => {
                     {auth.user?.lastName} {auth.user?.firstName} {auth.user?.middleName}
                 </div>
                 <div className={styles.profile__userdata}>
-                    <span className={styles.profile__dataParam}>{auth.user?.userRole ? `Роль: ${auth.user?.userRole}` : ""}</span>
-                    <span className={styles.profile__dataParam}>{auth.user?.userGroup ? `Группа: ${auth.user?.userGroup.title}` : ""}</span>
+                    <span
+                        className={styles.profile__dataParam}>{auth.user?.userRole ? `Роль: ${auth.user?.userRole}` : ""}</span>
+                    <span
+                        className={styles.profile__dataParam}>{auth.user?.userGroup ? `Группа: ${auth.user?.userGroup.title}` : ""}</span>
                 </div>
             </div>
             {favouriteDisciplines.length > 0 ?
@@ -26,7 +28,8 @@ const Profile = () => {
                 <div className={styles.profile__recent}>
                     <div className={styles.profile__listTitle}>Последние выполненные работы</div>
                     <div className={styles.profile__list}>
-                        {auth.user.lastSubmittedLabs.map(l => <div className={styles.profile__listItem} key={l.id}>{l.title}</div>)}
+                        {auth.user.lastSubmittedLabs.map(l => <div className={styles.profile__listItem}
+                                                                   key={l.id}>{l.title}</div>)}
                     </div>
                 </div>
                 : <></>}

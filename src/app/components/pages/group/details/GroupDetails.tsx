@@ -64,7 +64,8 @@ const GroupDetails = () => {
 
             {data?.users ?
                 <List title={"Учащиеся"}>
-                    {data.users.map(u => <ListItem title={u.lastName + " " + u.firstName + " " + u.middleName} path={"/users/" + u.id}/>)}
+                    {data.users.map(u => <ListItem title={u.lastName + " " + u.firstName + " " + u.middleName}
+                                                   path={"/users/" + u.id}/>)}
                 </List> : ""}
 
             {data?.disciplines ?
@@ -74,26 +75,26 @@ const GroupDetails = () => {
                 </List> : ""}
 
 
-                {!updateLoading ?
-                    <form onSubmit={handleSubmitDisciplineAdd(onSubmitDisciplineAdd)}>
-                        <input type="text"
-                               placeholder="Номер дисциплины" {...registerDisciplineAdd("disciplineId", {})} />
+            {!updateLoading ?
+                <form onSubmit={handleSubmitDisciplineAdd(onSubmitDisciplineAdd)}>
+                    <input type="text"
+                           placeholder="Номер дисциплины" {...registerDisciplineAdd("disciplineId", {})} />
 
-                        <input type="submit"/>
-                    </form>
-                    : <Loader/>}
+                    <input type="submit"/>
+                </form>
+                : <Loader/>}
 
-                {!addDisciplineLoading ? <form onSubmit={handleSubmitUpdate(onSubmitUpdate)}>
-                        <input type="text" placeholder="Название группы" {...registerUpdate("title", {})} />
+            {!addDisciplineLoading ? <form onSubmit={handleSubmitUpdate(onSubmitUpdate)}>
+                    <input type="text" placeholder="Название группы" {...registerUpdate("title", {})} />
 
-                        <input type="submit"/>
-                    </form>
-                    : <Loader/>}
+                    <input type="submit"/>
+                </form>
+                : <Loader/>}
 
-                {!deleteLoading ? <div>
-                        <button onClick={onSubmit}>delete</button>
-                    </div>
-                    : <Loader/>}
+            {!deleteLoading ? <div>
+                    <button onClick={onSubmit}>delete</button>
+                </div>
+                : <Loader/>}
         </div>
     );
 };
