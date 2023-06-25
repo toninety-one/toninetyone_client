@@ -1,5 +1,5 @@
 import {apiSlice} from "../../api/api.slice.ts";
-import {ISubmittedLabDetails} from "./submittedLab.interface.ts";
+import {IMarkSubmittedLab, ISubmittedLabDetails} from "./submittedLab.interface.ts";
 
 export const submittedLabApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -9,9 +9,18 @@ export const submittedLabApiSlice = apiSlice.injectEndpoints({
                 method: "GET",
             }),
         }),
+        markSubmittedLab: builder.mutation<null, IMarkSubmittedLab>({
+            query: ({labId, subId, mark}) => ({
+                url: `/labwork/${labId}/${subId}`,
+                method: "PUT",
+                body: {mark}
+            }),
+        }),
+
     })
 })
 
 export const {
-    useGetSubmittedLabByIdQuery
+    useGetSubmittedLabByIdQuery,
+    useMarkSubmittedLabMutation
 } = submittedLabApiSlice;

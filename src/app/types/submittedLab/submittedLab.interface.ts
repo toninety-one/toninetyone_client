@@ -26,3 +26,9 @@ export interface ISubmittedLabDetails extends ISubmittedLab {
     selfLabWork: ILabWorkPreview
     files: IFile[]
 }
+
+export interface IMarkSubmittedLab {
+    labId: string,
+    subId: string,
+    mark: string
+}
