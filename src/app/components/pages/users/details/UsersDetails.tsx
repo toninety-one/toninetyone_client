@@ -6,13 +6,13 @@ import {
 } from "../../../../types/auth/auth.api.slice.ts";
 import Loader from "../../../ui/loader/Loader.tsx";
 import {useParams} from "react-router-dom";
-import NotEnoughItems from "../../../ui/notEnoughtItems/NotEnoughItems.tsx";
+import NotEnoughItems from "../../../ui/list/notEnough/NotEnoughItems.tsx";
 import {useForm} from "react-hook-form";
 import {IUpdateIdentity, IUser} from "../../../../types/auth/auth.interface.ts";
 import DetailsContainer from "../../../ui/detailsContainer/DetailsContainer.tsx";
 import DetailsProperty from "../../../ui/detailsContainer/property/DetailsProperty.tsx";
 import List from "../../../ui/list/List.tsx";
-import ListItem from "../../../ui/list/listItem/ListItem.tsx";
+import ListItem from "../../../ui/list/item/ListItem.tsx";
 
 const UsersDetails = () => {
     const {userId} = useParams();

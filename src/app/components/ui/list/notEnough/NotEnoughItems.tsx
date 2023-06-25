@@ -1,4 +1,4 @@
-import styles from "./notEnoughitems.module.scss"
+import styles from "./notEnoughItems.module.scss"
 
 const NotEnoughItems = ({title}: { title: string }) => {
     return (

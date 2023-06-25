@@ -2,8 +2,8 @@ import {useGetAllUsersQuery} from "../../../types/auth/auth.api.slice.ts";
 import Loader from "../../ui/loader/Loader.tsx";
 import useHeader from "../../../hooks/useHeader.ts";
 import List from "../../ui/list/List.tsx";
-import NotEnoughItems from "../../ui/notEnoughtItems/NotEnoughItems.tsx";
-import ListItem from "../../ui/list/listItem/ListItem.tsx";
+import NotEnoughItems from "../../ui/list/notEnough/NotEnoughItems.tsx";
+import ListItem from "../../ui/list/item/ListItem.tsx";
 import {getUserTitle} from "../../../types/auth/user.helper.ts";
 
 const Users = () => {

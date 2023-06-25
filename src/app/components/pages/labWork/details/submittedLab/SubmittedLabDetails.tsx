@@ -5,7 +5,7 @@ import useHeader from "../../../../../hooks/useHeader.ts";
 import DetailsContainer from "../../../../ui/detailsContainer/DetailsContainer.tsx";
 import DetailsProperty from "../../../../ui/detailsContainer/property/DetailsProperty.tsx";
 import List from "../../../../ui/list/List.tsx";
-import ListItem from "../../../../ui/list/listItem/ListItem.tsx";
+import ListItem from "../../../../ui/list/item/ListItem.tsx";
 import {useGetSubmittedLabByIdQuery} from "../../../../../types/submittedLab/submittedLab.api.slice.ts";
 
 

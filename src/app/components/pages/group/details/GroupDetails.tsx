@@ -10,7 +10,7 @@ import {IGroup, IGroupDiscipline} from "../../../../types/group/group.interface.
 import useHeader from "../../../../hooks/useHeader.ts";
 import Loader from "../../../ui/loader/Loader.tsx";
 import List from "../../../ui/list/List.tsx";
-import ListItem from "../../../ui/list/listItem/ListItem.tsx";
+import ListItem from "../../../ui/list/item/ListItem.tsx";
 import DetailsContainer from "../../../ui/detailsContainer/DetailsContainer.tsx";
 import DetailsProperty from "../../../ui/detailsContainer/property/DetailsProperty.tsx";
 

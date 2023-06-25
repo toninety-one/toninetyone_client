@@ -2,14 +2,14 @@ import {useGetDisciplinesQuery} from "../../../types/discipline/discipline.api.s
 import "./discipline.scss"
 import Loader from "../../ui/loader/Loader.tsx";
 import {useEffect} from "react";
-import ListItem from "../../ui/list/listItem/ListItem.tsx";
+import ListItem from "../../ui/list/item/ListItem.tsx";
 import List from "../../ui/list/List.tsx";
 import ControlsContainer from "../../ui/controls/ControlsContainer.tsx";
 import ControlsItem from "../../ui/controls/controlsItem/ControlsItem.tsx";
 import {Role} from "../../../types/auth/role.enum.ts";
 import useAuth from "../../../hooks/useAuth.ts";
 import useHeader from "../../../hooks/useHeader.ts";
-import NotEnoughItems from "../../ui/notEnoughtItems/NotEnoughItems.tsx";
+import NotEnoughItems from "../../ui/list/notEnough/NotEnoughItems.tsx";
 
 const Discipline = () => {
     useHeader("Дисциплины")

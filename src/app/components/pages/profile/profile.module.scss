@@ -49,6 +49,10 @@
       border-radius: 10px;
       background-color: #333333;
       cursor: pointer;
+
+      &:hover{
+        background-color: #3f3f3f;
+      }
     }
   }
 
