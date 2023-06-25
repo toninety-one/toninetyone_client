@@ -11,6 +11,7 @@ import {Role} from "../../../../types/auth/role.enum.ts";
 import Loader from "../../../ui/loader/Loader.tsx";
 import DetailsContainer from "../../../ui/detailsContainer/DetailsContainer.tsx";
 import DetailsProperty from "../../../ui/detailsContainer/property/DetailsProperty.tsx";
+import NotEnoughItems from "../../../ui/notEnoughtItems/NotEnoughItems.tsx";
 
 const LabWorkDetails: FC = () => {
     const {labId} = useParams();
@@ -32,27 +33,28 @@ const LabWorkDetails: FC = () => {
                     <DetailsProperty text={"Детали"} data={data?.details ?? ""}/>
                 </DetailsContainer>
 
-                <div>
-                    {user?.userRole == Role.User && !data?.submittedLabs ? (
+                {user?.userRole == Role.User && data?.submittedLabs && data.submittedLabs.length == 0 ? (
+                    <ControlsContainer>
+                        <ControlsItem title={"Загрузить готовую лабораторную работу"} path={"submit"}/>
+                    </ControlsContainer>) : ""}
 
-                        <ControlsContainer>
-                            <ControlsItem title={"Загрузить готовую лабораторную работу"} path={"submit"}/>
-                        </ControlsContainer>) : ""}
 
-                    <List title={"Сданные лабораторные работы"}>
-                        {data?.submittedLabs?.map(s =>
+                <List title={"Сданные лабораторные работы"}>
+                    {data?.submittedLabs && data.submittedLabs.length > 0 ?
+                        data?.submittedLabs?.map(s =>
                             <ListItem key={s.id} title={s.lastName + " " + s.firstName + " " + s.middleName}
-                                      optionalText={s.mark} path={s.id}/>)}
-                    </List>
+                                      optionalText={s.mark} path={s.id}/>)
+                        : <NotEnoughItems title={"Нет сданных лабораторных работ"}/>}
+                </List>
 
-                    <List title={"Файлы лабораторной работы"} collapsable={true}>
 
-                        {data?.files.map(f =>
-                            <ListItem key={f.id} title={f.fileName}
-                                      filePath={import.meta.env.VITE_API_URL + "/" + f.path}/>)}
-                    </List>
+                <List title={"Файлы лабораторной работы"} collapsable={true}>
 
-                </div>
+                    {data?.files.map(f =>
+                        <ListItem key={f.id} title={f.fileName}
+                                  filePath={import.meta.env.VITE_API_URL + "/" + f.path}/>)}
+                </List>
+
 
             </div> : <Loader/>
     )

@@ -12,7 +12,7 @@ export interface ISubmittedLab {
 }
 
 export interface ISubmittedLabLookupDto extends ISubmittedLab {
-    disciplineId: string;
+    labWorkId: string;
 }
 
 export interface ISubmittedLabDetailsLookupDto extends ISubmittedLab {

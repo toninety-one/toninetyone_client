@@ -76,7 +76,7 @@ const UsersDetails = () => {
                     {data.lastSubmittedLabs && data.lastSubmittedLabs.length > 0 ?
                         <List title={"Последние сданные лабораторные работы"} collapsable={true}>
                             {data.lastSubmittedLabs.map(l => <ListItem title={l.title}
-                                                                       path={"/labwork/" + l.disciplineId + "/" + l.id}
+                                                                       path={"/labwork/" + l.labWorkId + "/" + l.id}
                                                                        optionalText={l.mark}/>)}
                         </List> : ""}
 

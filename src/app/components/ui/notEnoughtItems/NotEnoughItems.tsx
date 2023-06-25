@@ -1,8 +1,10 @@
+import styles from "./notEnoughitems.module.scss"
+
 const NotEnoughItems = ({title}: { title: string }) => {
     return (
-        <div>
+        <h1 className={styles.notEnoughItems__container}>
             {title}
-        </div>
+        </h1>
     )
 }
 export default NotEnoughItems;

@@ -11,6 +11,19 @@ type ListItemProps = {
 const ListItem = ({title, path, filePath, optionalText}: ListItemProps) => {
     const navigate = useNavigate();
 
+    const download = (path: string) => {
+        const element = document.createElement("a");
+        const file = new Blob(
+            [
+                path
+            ],
+            { type: "*/*" }
+        );
+        element.href = URL.createObjectURL(file);
+        element.download = "image.jpg";
+        element.click();
+    };
+
     return (
         <>
             <div className={styles.list__item} onClick={() => {
@@ -19,9 +32,10 @@ const ListItem = ({title, path, filePath, optionalText}: ListItemProps) => {
                 }
 
                 if (filePath) {
-                    const link = document.createElement('a');
-                    link.href = filePath;
-                    link.click();
+                    download(filePath)
+                    // const link = document.createElement('a');
+                    // link.href = filePath;
+                    // link.click();
                 }
             }}>
 
