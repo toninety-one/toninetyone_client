@@ -1,26 +1,27 @@
 import {useNavigate} from "react-router-dom";
 import styles from "./listItem.module.scss"
+import {IFile} from "../../../../types/labFile/labFile.interface.ts";
 
 type ListItemProps = {
     title: string;
     path?: string;
-    filePath?: string;
+    file?: IFile;
     optionalText?: string;
 }
 
-const ListItem = ({title, path, filePath, optionalText}: ListItemProps) => {
+const ListItem = ({title, path, file, optionalText}: ListItemProps) => {
     const navigate = useNavigate();
 
-    const download = (path: string) => {
+    const download = (fileData: IFile) => {
         const element = document.createElement("a");
-        const file = new Blob(
+        const blobFile = new Blob(
             [
-                path
+                `${import.meta.env.VITE_API_URL}/${fileData.path}`
             ],
-            { type: "*/*" }
+            {type: "*/*"}
         );
-        element.href = URL.createObjectURL(file);
-        element.download = "image.jpg";
+        element.href = URL.createObjectURL(blobFile);
+        element.download = fileData.fileName;
         element.click();
     };
 
@@ -31,11 +32,8 @@ const ListItem = ({title, path, filePath, optionalText}: ListItemProps) => {
                     navigate(path)
                 }
 
-                if (filePath) {
-                    download(filePath)
-                    // const link = document.createElement('a');
-                    // link.href = filePath;
-                    // link.click();
+                if (file && file.path) {
+                    download(file)
                 }
             }}>
 

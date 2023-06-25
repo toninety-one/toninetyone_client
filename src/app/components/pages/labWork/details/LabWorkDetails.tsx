@@ -26,7 +26,7 @@ const LabWorkDetails: FC = () => {
     useHeader(title)
 
     return (!isLoading ?
-            <div>
+            <>
                 <DetailsContainer title={"Лабораторная работа"}>
                     <DetailsProperty text={"Наименование"} data={data?.title ?? ""}/>
                     <DetailsProperty text={"Детали"} data={data?.details ?? ""}/>
@@ -44,16 +44,12 @@ const LabWorkDetails: FC = () => {
                                   optionalText={s.mark} path={s.id}/>)}
                 </List>
 
-
                 <List title={"Файлы лабораторной работы"} collapsable={true}>
-
                     {data?.files.map(f =>
-                        <ListItem key={f.id} title={f.fileName}
-                                  filePath={import.meta.env.VITE_API_URL + "/" + f.path}/>)}
+                        <ListItem key={f.id} title={f.fileName} file={f}/>)}
                 </List>
 
-
-            </div> : <Loader/>
+            </> : <Loader/>
     )
 }
 

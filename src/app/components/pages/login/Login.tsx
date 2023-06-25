@@ -8,7 +8,7 @@ import {useDispatch} from "react-redux";
 import Loader from "../../ui/loader/Loader.tsx";
 import useHeader from "../../../hooks/useHeader.ts";
 import styles from "./login.module.scss"
-import Button from "../../ui/button/button.tsx";
+import Button from "../../ui/formContainer/button/button.tsx";
 
 export default function Login() {
     useHeader("Вход")

@@ -14,7 +14,7 @@ import useAuth from "../../../../../hooks/useAuth.ts";
 import {Role} from "../../../../../types/auth/role.enum.ts";
 import {useForm} from "react-hook-form";
 import {IMarkSubmittedLab} from "../../../../../types/submittedLab/submittedLab.interface.ts";
-import Button from "../../../../ui/button/button.tsx";
+import Button from "../../../../ui/formContainer/button/button.tsx";
 
 
 const SubmittedLabDetails: FC = () => {
@@ -61,7 +61,7 @@ const SubmittedLabDetails: FC = () => {
                 <List title={"Файлы лабораторной работы"} collapsable={true} notEnoughMessage={"Файлов нет"}>
                     {data?.files.map(f =>
                         <ListItem key={f.id} title={f.fileName}
-                                  filePath={import.meta.env.VITE_API_URL + "/" + f.path}/>)}
+                                  file={f}/>)}
                 </List>
 
                 {!isMarkLoading ? user?.userRole != Role.User &&
