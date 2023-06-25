@@ -52,7 +52,8 @@ const List: FC<PropsWithChildren<Props>> = ({children, title, collapsable, notEn
     return (
         <div className={styles.list__container}>
             <div
-                className={styles.list__title + (collapsable ? " " + styles.list__title_collapsable : "") + (collapsed ? " " + styles.list__title_collapsed : "")}
+                className={styles.list__title + (collapsable ? " " + styles.list__title_collapsable : "") +
+                    (collapsed ? " " + styles.list__title_collapsed : "")}
                 onClick={handleCollapse}>
                 {title}
             </div>

@@ -14,20 +14,16 @@ const CreateGroup = () => {
         setSuccessText("Группа успешно создана")
     }
 
-    return (
-        <div>
-            {!isLoading ?
-                <>
-                    <div>{successText}</div>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                        <input type="text" placeholder="Название группы" {...register("title", {})} />
+    return (!isLoading ?
+            <>
+                <div>{successText}</div>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <input type="text" placeholder="Название группы" {...register("title", {})} />
 
-                        <input type="submit"/>
-                    </form>
-                </>
-                : <Loader/>}
-        </div>
-
+                    <input type="submit"/>
+                </form>
+            </>
+            : <Loader/>
     )
 }
 

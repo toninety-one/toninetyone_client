@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import styles from "./listItem.module.scss"
 import {IFile} from "../../../../types/labFile/labFile.interface.ts";
+import {FC} from "react";
 
 type ListItemProps = {
     title: string;
@@ -9,7 +10,7 @@ type ListItemProps = {
     optionalText?: string;
 }
 
-const ListItem = ({title, path, file, optionalText}: ListItemProps) => {
+const ListItem: FC<ListItemProps> = ({title, path, file, optionalText}) => {
     const navigate = useNavigate();
 
     const download = (fileData: IFile) => {

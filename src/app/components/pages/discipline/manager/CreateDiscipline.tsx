@@ -11,7 +11,7 @@ const CreateDiscipline = () => {
 
     const onSubmit = async (data: IDisciplineCreate) => {
         await createDiscipline(data)
-        setSuccessText("Группа успешно создана")
+        setSuccessText("Дисциплина успешно создана")
     }
 
     return (

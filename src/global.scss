@@ -8,3 +8,13 @@
 html, body, #root {
   height: 100%;
 }
+
+//TODO: create input component
+input{
+  padding: 1%;
+  margin: 1%;
+  background-color: #3b3b3b;
+  color: white;
+  border: #9f9f9f 1px solid;
+  border-radius: 10px;
+}

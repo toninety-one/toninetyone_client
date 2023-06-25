@@ -20,7 +20,6 @@ export default function Login() {
     const {
         register,
         handleSubmit,
-        // formState: {  },
     } = useForm<ILogin>();
     const onSubmit = async (data: ILogin) => {
         try {
@@ -30,7 +29,6 @@ export default function Login() {
 
             navigate("/");
         } catch (err) {
-            // catch errors or use formState: {errors}
             errRef.current?.focus();
         }
     };
