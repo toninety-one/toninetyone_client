@@ -62,18 +62,15 @@ const GroupDetails = () => {
                 <DetailsProperty text={"Дата изменения"} data={data?.editDate ? data.editDate : "Отсутствует"}/>
             </DetailsContainer>
 
-            {data?.users ?
-                <List title={"Учащиеся"}>
-                    {data.users.map(u => <ListItem title={u.lastName + " " + u.firstName + " " + u.middleName}
-                                                   path={"/users/" + u.id}/>)}
-                </List> : ""}
+            <List title={"Учащиеся"} notEnoughMessage={"Список учащихся пуст"}>
+                {data?.users && data.users.map(u =>
+                    <ListItem title={u.lastName + " " + u.firstName + " " + u.middleName} path={"/users/" + u.id}/>)}
+            </List>
 
-            {data?.disciplines ?
-                <List title={"Дисциплины"}>
-                    {data.disciplines.map(d => <ListItem title={d.title} path={"/discipline/" + d.id}/>)}
-
-                </List> : ""}
-
+            <List title={"Дисциплины"} notEnoughMessage={"Список дисциплин пуст"}>
+                {data?.disciplines && data.disciplines.map(d =>
+                    <ListItem title={d.title} path={"/discipline/" + d.id}/>)}
+            </List>
 
             {!updateLoading ?
                 <form onSubmit={handleSubmitDisciplineAdd(onSubmitDisciplineAdd)}>

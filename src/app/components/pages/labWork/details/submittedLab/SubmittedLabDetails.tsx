@@ -34,8 +34,6 @@ const SubmittedLabDetails: FC = () => {
         }
     });
     const onSubmit = async (markData: IMarkSubmittedLab) => {
-        console.log(markData)
-
         await markSubmittedLab(markData)
     };
     if (isLoading) {

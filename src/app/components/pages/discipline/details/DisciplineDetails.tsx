@@ -10,7 +10,6 @@ import ControlsItem from "../../../ui/controls/controlsItem/ControlsItem.tsx";
 import useAuth from "../../../../hooks/useAuth.ts";
 import {Role} from "../../../../types/auth/role.enum.ts";
 import useHeader from "../../../../hooks/useHeader.ts";
-import NotEnoughItems from "../../../ui/list/notEnough/NotEnoughItems.tsx";
 
 const DisciplineDetails = () => {
 
@@ -40,7 +39,7 @@ const DisciplineDetails = () => {
     }
 
     return isLoading ? (<Loader/>) : (
-        <List title={"Лабораторные работы"}>
+        <List title={"Лабораторные работы"} notEnoughMessage={"Лабораторных работ нет"}>
             {auth.user?.userRole != Role.User ?
                 <ControlsContainer>
                     <ControlsItem title={"Управление"} path={"manager"}/>
@@ -48,9 +47,8 @@ const DisciplineDetails = () => {
                 </ControlsContainer>
                 : <></>}
 
-            {data?.labWorks && data.labWorks.length > 0 ? data?.labWorks?.map(l =>
-                    <ListItem key={l.id} title={l.title} path={`/labwork/${l.id}`}></ListItem>) :
-                <NotEnoughItems title={"Лабораторных работ нет"}/>}
+            {data?.labWorks && data?.labWorks?.map(l =>
+                <ListItem key={l.id} title={l.title} path={`/labwork/${l.id}`}></ListItem>)}
         </List>
     );
 };

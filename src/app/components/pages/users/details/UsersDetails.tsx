@@ -49,19 +49,17 @@ const UsersDetails = () => {
     });
 
     const onSubmit = async (data: IUpdateIdentity) => {
-        console.log(data)
         await updateIdentityUser(data)
     };
 
     const onSubmitUser = async (data: IUser) => {
-        console.log(data)
         await updateUser(data)
     };
 
     return isLoading ? (<Loader/>) : (
-        <div>
+        <>
             {data ?
-                <div>
+                <>
                     <DetailsContainer title={"Пользователь"}>
                         <DetailsProperty text={"Фамилия"} data={data.lastName}/>
                         <DetailsProperty text={"Имя"} data={data.firstName}/>
@@ -73,12 +71,13 @@ const UsersDetails = () => {
                         <DetailsProperty text={"Номер"} data={data.id}/>
                     </DetailsContainer>
 
-                    {data.lastSubmittedLabs && data.lastSubmittedLabs.length > 0 ?
-                        <List title={"Последние сданные лабораторные работы"} collapsable={true}>
-                            {data.lastSubmittedLabs.map(l => <ListItem title={l.title}
-                                                                       path={"/labwork/" + l.labWorkId + "/" + l.id}
-                                                                       optionalText={l.mark}/>)}
-                        </List> : ""}
+                    <List title={"Последние сданные лабораторные работы"} collapsable={true}
+                          notEnoughMessage={"Нет последних сданных лабораторных работ"}>
+                        {data.lastSubmittedLabs && data.lastSubmittedLabs.map(l =>
+                            <ListItem title={l.title} path={"/labwork/" + l.labWorkId + "/" + l.id}
+                                      optionalText={l.mark}/>)
+                        }
+                    </List>
 
                     <form onSubmit={handleIdentity(onSubmit)}>
                         <input type="text" placeholder="userName" {...registerIdentity("userName", {})} />
@@ -100,9 +99,9 @@ const UsersDetails = () => {
                         <input type="submit"/>
                     </form>
 
-                </div>
+                </>
                 : <NotEnoughItems title={"Информация о пользователе не найдена"}/>}
-        </div>
+        </>
     );
 };
 

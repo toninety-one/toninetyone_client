@@ -32,23 +32,22 @@ const LabWorkDetails: FC = () => {
                     <DetailsProperty text={"Детали"} data={data?.details ?? ""}/>
                 </DetailsContainer>
 
-                {user?.userRole == Role.User && data?.submittedLabs && data.submittedLabs.length == 0 ? (
-                    <ControlsContainer>
-                        <ControlsItem title={"Загрузить готовую лабораторную работу"} path={"submit"}/>
-                    </ControlsContainer>) : ""}
-
-
                 <List title={"Сданные лабораторные работы"} notEnoughMessage={"Нет сданных лабораторных работ"}>
+                    {user?.userRole == Role.User && data?.submittedLabs && data.submittedLabs.length == 0 ? (
+                        <ControlsContainer>
+                            <ControlsItem title={"Загрузить готовую лабораторную работу"} path={"submit"}/>
+                        </ControlsContainer>) : ""}
+
                     {data?.submittedLabs && data?.submittedLabs?.map(s =>
                         <ListItem key={s.id} title={s.lastName + " " + s.firstName + " " + s.middleName}
                                   optionalText={s.mark} path={s.id}/>)}
                 </List>
 
-                <List title={"Файлы лабораторной работы"} collapsable={true}>
+                <List title={"Файлы лабораторной работы"} collapsable={true}
+                      notEnoughMessage={"Нет файлов лабораторной работы"}>
                     {data?.files.map(f =>
                         <ListItem key={f.id} title={f.fileName} file={f}/>)}
                 </List>
-
             </> : <Loader/>
     )
 }

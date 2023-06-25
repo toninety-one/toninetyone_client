@@ -20,6 +20,35 @@ const List: FC<PropsWithChildren<Props>> = ({children, title, collapsable, notEn
         }
     };
 
+    let isHaveControls = false;
+    let isElementEmpty = false;
+
+    // find controls and detect empty element
+    (React.Children.toArray(children) as { type: { name: string } }[]).map(c => {
+        if (c != null && c.type && c.type.name != null && c.type.name == "ControlsContainer"
+        ) {
+            isHaveControls = true;
+        } else if (c == null || c.type == null) {
+            isElementEmpty = true
+        }
+    })
+
+    let itemsCount = React.Children.count(children);
+
+    if (isHaveControls) {
+        itemsCount--;
+    }
+
+    let child: React.ReactNode | "" = children;
+
+    if (itemsCount == 0 || isElementEmpty && itemsCount == 1) {
+        child = <>{child}<NotEnoughItems title={emptyMessage}/></>
+    }
+
+    if (collapsed) {
+        child = ""
+    }
+
     return (
         <div className={styles.list__container}>
             <div
@@ -28,7 +57,7 @@ const List: FC<PropsWithChildren<Props>> = ({children, title, collapsable, notEn
                 {title}
             </div>
             <div>
-                {!collapsed && (React.Children.count(children) ? children : <NotEnoughItems title={emptyMessage}/>)}
+                {child}
             </div>
         </div>
     );
