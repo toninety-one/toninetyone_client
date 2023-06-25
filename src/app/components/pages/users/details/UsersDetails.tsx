@@ -9,6 +9,10 @@ import {useParams} from "react-router-dom";
 import NotEnoughItems from "../../../ui/notEnoughtItems/NotEnoughItems.tsx";
 import {useForm} from "react-hook-form";
 import {IUpdateIdentity, IUser} from "../../../../types/auth/auth.interface.ts";
+import DetailsContainer from "../../../ui/detailsContainer/DetailsContainer.tsx";
+import DetailsProperty from "../../../ui/detailsContainer/property/DetailsProperty.tsx";
+import List from "../../../ui/list/List.tsx";
+import ListItem from "../../../ui/list/listItem/ListItem.tsx";
 
 const UsersDetails = () => {
     const {userId} = useParams();
@@ -58,35 +62,46 @@ const UsersDetails = () => {
         <div>
             {data ?
                 <div>
-                    <pre>{JSON.stringify(data, null, 2)}</pre>
+                    <DetailsContainer title={"Пользователь"}>
+                        <DetailsProperty text={"Фамилия"} data={data.lastName}/>
+                        <DetailsProperty text={"Имя"} data={data.firstName}/>
+                        <DetailsProperty text={"Отчество"} data={data.middleName ?? "Отсутствует"}/>
+                        <DetailsProperty text={"Логин"} data={data.userName}/>
+                        <DetailsProperty text={"Роль"} data={data.userRole}/>
+                        {data.userGroup ?
+                            <DetailsProperty text={"Группа"} data={data.userGroup.title ?? "Отсутствует"}/> : ""}
+                        <DetailsProperty text={"Номер"} data={data.id}/>
+                    </DetailsContainer>
+
+                    {data.lastSubmittedLabs && data.lastSubmittedLabs.length > 0 ?
+                        <List title={"Последние сданные лабораторные работы"} collapsable={true}>
+                            {data.lastSubmittedLabs.map(l => <ListItem title={l.title}
+                                                                       path={"/labwork/" + l.disciplineId + "/" + l.id}
+                                                                       optionalText={l.mark}/>)}
+                        </List> : ""}
+
+                    <form onSubmit={handleIdentity(onSubmit)}>
+                        <input type="text" placeholder="userName" {...registerIdentity("userName", {})} />
+                        <select {...registerIdentity("userRole")}>
+                            <option value="User">User</option>
+                            <option value="Teacher">Teacher</option>
+                            <option value="Administrator">Administrator</option>
+                        </select>
+
+                        <input type="submit"/>
+                    </form>
+
+                    <form onSubmit={handleUser(onSubmitUser)}>
+                        <input type="text" placeholder="lastName" {...registerUser("lastName", {})} />
+                        <input type="text" placeholder="firstName" {...registerUser("firstName", {})} />
+                        <input type="text" placeholder="middleName" {...registerUser("middleName", {})} />
+                        <input type="text" placeholder="groupId" {...registerUser("groupId", {})} />
+
+                        <input type="submit"/>
+                    </form>
 
                 </div>
                 : <NotEnoughItems title={"Информация о пользователе не найдена"}/>}
-
-            <div>
-                <form onSubmit={handleIdentity(onSubmit)}>
-                    <input type="text" placeholder="userName" {...registerIdentity("userName", {})} />
-                    <select {...registerIdentity("userRole")}>
-                        <option value="User">User</option>
-                        <option value="Teacher">Teacher</option>
-                        <option value="Administrator">Administrator</option>
-                    </select>
-
-                    <input type="submit"/>
-                </form>
-            </div>
-
-            <div>
-                <form onSubmit={handleUser(onSubmitUser)}>
-                    <input type="text" placeholder="lastName" {...registerUser("lastName", {})} />
-                    <input type="text" placeholder="firstName" {...registerUser("firstName", {})} />
-                    <input type="text" placeholder="middleName" {...registerUser("middleName", {})} />
-                    <input type="text" placeholder="groupId" {...registerUser("groupId", {})} />
-
-                    <input type="submit"/>
-                </form>
-            </div>
-
         </div>
     );
 };

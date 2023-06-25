@@ -1,6 +1,6 @@
 import {IGroup} from "../group/group.interface.ts";
 import {Role} from "./role.enum.ts";
-import {ISubmittedLab} from "../submittedLab.interface.ts";
+import {ISubmittedLabLookupDto} from "../submittedLab/submittedLab.interface.ts";
 
 export interface IUser {
     id: string;
@@ -19,7 +19,7 @@ export interface IUserDetails extends Omit<IUser, "groupID"> {
     userRole: Role;
     userName: string;
     userGroup: IGroup;
-    lastSubmittedLabs: ISubmittedLab[];
+    lastSubmittedLabs: ISubmittedLabLookupDto[];
 }
 
 export interface IToken {

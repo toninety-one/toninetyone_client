@@ -8,7 +8,7 @@ type Props = {
 
 const List: FC<PropsWithChildren<Props>> = ({children, title, collapsable}) => {
 
-    const [collapsed, setCollapsed] = useState(collapsable ?? false);
+    const [collapsed, setCollapsed] = useState(false);
 
     const handleCollapse = () => {
         if (collapsable) {

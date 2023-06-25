@@ -9,6 +9,10 @@ import {useForm} from "react-hook-form";
 import {IGroup, IGroupDiscipline} from "../../../../types/group/group.interface.ts";
 import useHeader from "../../../../hooks/useHeader.ts";
 import Loader from "../../../ui/loader/Loader.tsx";
+import List from "../../../ui/list/List.tsx";
+import ListItem from "../../../ui/list/listItem/ListItem.tsx";
+import DetailsContainer from "../../../ui/detailsContainer/DetailsContainer.tsx";
+import DetailsProperty from "../../../ui/detailsContainer/property/DetailsProperty.tsx";
 
 const GroupDetails = () => {
     const {groupId} = useParams();
@@ -51,11 +55,25 @@ const GroupDetails = () => {
 
     return isLoading ? (<Loader/>) : (
         <div>
-            <div>
-                <pre>{JSON.stringify(data, null, 2)}</pre>
-            </div>
+            <DetailsContainer title={"Группа"}>
+                <DetailsProperty text={"Наименование"} data={data?.title ?? ""}/>
+                <DetailsProperty text={"Аудитория"} data={data?.classRoom ? data.classRoom : "Отсутствует"}/>
+                <DetailsProperty text={"Дата создания"} data={data?.creationDate ? data.creationDate : "Отсутствует"}/>
+                <DetailsProperty text={"Дата изменения"} data={data?.editDate ? data.editDate : "Отсутствует"}/>
+            </DetailsContainer>
 
-            <div>
+            {data?.users ?
+                <List title={"Учащиеся"}>
+                    {data.users.map(u => <ListItem title={u.lastName + " " + u.firstName + " " + u.middleName} path={"/users/" + u.id}/>)}
+                </List> : ""}
+
+            {data?.disciplines ?
+                <List title={"Дисциплины"}>
+                    {data.disciplines.map(d => <ListItem title={d.title} path={"/discipline/" + d.id}/>)}
+
+                </List> : ""}
+
+
                 {!updateLoading ?
                     <form onSubmit={handleSubmitDisciplineAdd(onSubmitDisciplineAdd)}>
                         <input type="text"
@@ -64,23 +82,18 @@ const GroupDetails = () => {
                         <input type="submit"/>
                     </form>
                     : <Loader/>}
-            </div>
 
-            <div>
                 {!addDisciplineLoading ? <form onSubmit={handleSubmitUpdate(onSubmitUpdate)}>
                         <input type="text" placeholder="Название группы" {...registerUpdate("title", {})} />
 
                         <input type="submit"/>
                     </form>
                     : <Loader/>}
-            </div>
 
-            <div>
                 {!deleteLoading ? <div>
                         <button onClick={onSubmit}>delete</button>
                     </div>
                     : <Loader/>}
-            </div>
         </div>
     );
 };

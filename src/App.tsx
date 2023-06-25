@@ -5,7 +5,7 @@ import RequireAuth from "./app/components/ui/layout/RequireAuth";
 import {Role} from "./app/types/auth/role.enum.ts";
 import Login from "./app/components/pages/login/Login.tsx";
 import Error from "./app/components/pages/error/Error.tsx";
-import Profile from "./app/components/pages/Profile/Profile.tsx";
+import Profile from "./app/components/pages/profile/Profile.tsx";
 import Group from "./app/components/pages/group/Group.tsx";
 import GroupDetails from "./app/components/pages/group/details/GroupDetails.tsx";
 import Discipline from "./app/components/pages/discipline/Discipline.tsx";

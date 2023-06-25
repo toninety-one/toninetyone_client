@@ -1,5 +1,5 @@
 import {IDiscipline} from "../discipline/discipline.interface.ts";
-import {ISubmittedLab, ISubmittedLabDetailsLookupDto} from "../submittedLab.interface.ts";
+import {ISubmittedLab, ISubmittedLabDetailsLookupDto} from "../submittedLab/submittedLab.interface.ts";
 import {IFile} from "../labFile/labFile.interface.ts";
 
 export interface ILabWorkLookupDto {
@@ -27,3 +27,5 @@ export interface ILabWork extends Omit<ILabWorkCreate, "disciplineId"> {
 export interface ILabWorkDetails extends Omit<ILabWork, "submittedLabs"> {
     submittedLabs: ISubmittedLabDetailsLookupDto[] | null
 }
+
+export type ILabWorkPreview = Omit<ILabWork, "files" | "selfDiscipline" | "submittedLabs">;
